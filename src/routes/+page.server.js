@@ -12,6 +12,10 @@ export const actions = {
         db.addRecipe(recipe);
     },
 
+    delete: async () => {
+        db.deleteAll();
+    },
+
     list: async () => {
         db.listRecipes();
     },

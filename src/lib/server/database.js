@@ -1,4 +1,9 @@
-const db = new Map();
+import { PrismaClient } from '@prisma/client'
+export const db = new PrismaClient()
+
+let count = 0;
+
+// const db = new Map();
 
 // recipes are stored in db as id, JSON string(recipe)
 
@@ -18,11 +23,42 @@ export function getRecipe(id) {
     return 'invalid id';
 }
 
-export function addRecipe(recipe) {
-    db.set(
-        generateID(db),
-        recipe
-    )
+// OLD addRecipe for local db Map()
+// export function addRecipe(recipe) {
+//     db.set(
+//         generateID(db),
+//         recipe
+//     )
+// }
+export async function deleteRecipe(id) {
+    await db.recipe.delete({
+        where: {
+            objid: id,
+        }
+    })
+    // const deletei = await db.ingredient.delete({
+    //     where: {
+    //         id: id,
+    //     }
+    // })
+}
+export async function deleteAll() {
+    await db.ingredient.deleteMany({});
+    await db.step.deleteMany({});
+    await db.recipe.deleteMany({});
+}
+
+export async function addRecipe(recipe) {
+    const recipeobject = JSON.parse(recipe);
+    count = count+1;
+    const myid = count;
+    await db.recipe.create({ 
+        data: {
+            objid: myid,
+            name: recipeobject.name,
+            ingredients: {create: recipeobject.ingredients},
+            steps: {create: recipeobject.steps},
+        }})
 }
 
 export function searchName(arg) {

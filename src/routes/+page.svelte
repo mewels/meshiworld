@@ -103,6 +103,19 @@
             </label>
         </form>
     </div>
+
+    <br>
+    <br>
+
+    <div>
+        <form method="POST" action='?/delete'>
+            <label>
+                <button>
+                    delete delete delete
+                </button> 
+            </label>
+        </form>
+    </div>
     <!-- <div>
         {JSON.stringify(name,null,2)}
     </div>
