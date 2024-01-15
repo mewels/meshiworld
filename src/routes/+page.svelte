@@ -50,7 +50,7 @@
             <input type = "text" id = "name" name="name" bind:value = {name} required minlength = 1 size = 20/>
         </label>
                 
-        <h1>add ingredients</h1>
+        <h3>add ingredients</h3>
         {#each ingredientlist as a, i}
             <div class = "element">
                 <label>
@@ -68,7 +68,7 @@
         <button on:click|preventDefault = {addIngredient}>Add</button>
         <button on:click = {removeIngredient}>Remove</button>
 
-        <h1>add steps</h1>
+        <h3>add steps</h3>
         {#each steplist as s, i}
         <div class = "element">
             <label>
@@ -81,7 +81,7 @@
         <button on:click|preventDefault = {addStep}>Add</button>
         <button on:click = {removeStep}>Remove</button>
         
-        <div>
+        <div class = "submit">
             <form method="POST" action='?/create'>
                 <input type = "hidden" name = "compiledrecipe" id = "compiledrecipe" value = {JSON.stringify(compiledrecipe)}>
                 <button>
@@ -90,18 +90,13 @@
             </form>
         </div>
     
-    <div>
-        <form method="POST" action='?/list'>
-            <button>list recipes in console</button>
-        </form>
-    </div>
-    <div>
+    <!-- <div>
         <form method="POST" action='?/search'>
             <label>search: 
                 <input type = "text" name = "name" id = "name" autocomplete="off">
             </label>
         </form>
-    </div>
+    </div> -->
 
     <br>
     <br>
@@ -155,11 +150,19 @@
         line-height: 1;
     }
 
+    div.submit {
+        margin: 2em;
+    }
+
     p {
         margin: inherit;
     }
 
     h1 {
+        text-align: center;
+    }
+
+    h3 {
         text-align: center;
     }
     
