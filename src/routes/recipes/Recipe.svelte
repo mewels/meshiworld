@@ -26,7 +26,7 @@
         {/each}
     </ol>
 
-<a href="../recipes/">back to all recipes</a>
+<a href="../recipes/" data-sveltekit-preload-data>back to all recipes</a>
 </div>
 
 <style>

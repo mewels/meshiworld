@@ -13,8 +13,8 @@
     <h1>bagel's collaborative cookbook!</h1> 
     <ul>
         {#each data.recipes as {id, name}}
-            <li><a href="/recipes/{id}">{name}</a></li>
+            <li><a href="/recipes/{id}" data-sveltekit-preload-data>{name}</a></li>
         {/each}
     </ul>
-    <a href="../">back to recipe form</a>
+    <a href="../" data-sveltekit-preload-data>back to recipe form</a>
 </body>
