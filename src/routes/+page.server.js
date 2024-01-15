@@ -29,7 +29,7 @@ export const actions = {
         const data = await request.formData();
         console.log("Name search");
         db.searchName(data.get("name"));
-        console.log("Ingredient search");
-        db.searchIngredient(data.get("name"));
+        // console.log("Ingredient search");
+        // db.searchIngredient(data.get("name"));
     },
 }   

@@ -1,9 +1,8 @@
 <script>
     import {page} from '$app/stores'
-    import InfoHead from "../lib/InfoHead.svelte";
+    import InfoHead from "$lib/InfoHead.svelte";
     export let data;
     // import Img from '../lib/Img.svelte';
-    // import RecipeElement from '../lib/RecipeElement.svelte';
 
     // import nekoedit from './assets/nekoedit.png' 
     let ingredientlist = [{name: '', amount: ''}];
@@ -32,8 +31,6 @@
         steps: steplist
     };
 
-    // $: console.log(compiledrecipe);
-
 </script>
 
 <InfoHead pagedescription="> ______ /<" pagetitle ="hell world" pageurl = {$page.url}/>
@@ -43,7 +40,9 @@
 <!-- <h1>images you might like</h1>
 
 <Img ilink = {nekoedit} ialt = 'an image you might like' icaption = 'the first image on this dumb website'/> -->
-
+<div class = "transbox">
+    <a href = "/recipes/">see all recipes</a>
+</div>
 <h1>Recipe Input Form</h1>
 <div class = "transbox">
         <label>
@@ -130,9 +129,6 @@
         {JSON.stringify(compiledrecipe)}
     </div> -->
 </div>
-
-
-
 </body>
 
 <style>

@@ -29,7 +29,6 @@ model Step {
 
 model Recipe {
   id          Int          @id @default(autoincrement())
-  objid       Int          @unique
   name        String
   ingredients Ingredient[]
   steps       Step[]
