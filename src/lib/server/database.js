@@ -1,18 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 export const db = new PrismaClient()
 
-// OLD Functions
-export function searchIngredient(arg) {
-    for (const k of db.keys()) {
-        const recipe = getRecipe(k);
-        for (const [n, a] of Object.entries(recipe.ingredients)) {
-            if (a.name.toLowerCase().includes(arg.toLowerCase())) {
-                console.log('[',k,']: ', recipe.name);
-            }
-        }
-    }
-}
-
 // PRISMA FUNCTIONS
 export async function addRecipe(recipe) {
     const recipeobject = JSON.parse(recipe);
@@ -63,15 +51,33 @@ export async function searchName(arg) {
                 contains: arg,
             },
         },
-        include: {
-            ingredients: true,
-            steps: true,
+        // include: {
+        //     ingredients: true,
+        //     steps: true,
+        // },
+    })
+    
+    // for (const r of recipes) {
+    //     console.log(JSON.stringify(r))
+    // }
+    return recipes;
+}
+
+export async function searchIngredient(arg) {
+    let recipes = [];
+    const ingredients = await db.ingredient.findMany({
+        where: {
+            name: {
+                contains: arg,
+            },
         },
     })
-    console.log(recipes);
-    for (const r of recipes) {
-        console.log(JSON.stringify(r))
+
+    for (const i of ingredients) {
+        const r = await getRecipe(i.recipeId);
+        recipes.push(r);
     }
+    return recipes;
 }
 
 export async function listAll() {
