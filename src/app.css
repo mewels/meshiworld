@@ -1,0 +1,12 @@
+:root {
+	font-size: 18px;
+	font-weight: normal;
+	line-height: 1.5;
+
+	--page-padding: 1rem;
+
+	--background-color: #ffdfcc;
+	--mid-grey: rgb(199, 199, 199);
+	--text-color: #000;
+	--theme-color: rgb(164, 229, 156);
+}
