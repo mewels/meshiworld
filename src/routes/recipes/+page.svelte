@@ -16,8 +16,6 @@
 <InfoHead pagedescription="0 ____ 0" pagetitle ="Bagel's collaborative cookbook!" pageurl = {$page.url}/>
 
 <body>
-    <Nav></Nav>
-    <h1>bagel's collaborative cookbook!</h1> 
     <form method="POST" action='?/{searchkey}'>
         <label>search: 
             <input type = "text"  placeholder = 'Search by name or ingredient' name = "searchkey" id = "searchkey"  autocomplete="off"

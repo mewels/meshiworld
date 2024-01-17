@@ -6,6 +6,4 @@
 
 <body>
     <InfoHead pagedescription = '^ ____ ^' pagetitle = 'bagelzone' pageurl = {$page.url}/>
-
-    <Nav></Nav>
 </body>

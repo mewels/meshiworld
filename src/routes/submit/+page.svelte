@@ -1,7 +1,6 @@
 <script>
     import {page} from '$app/stores'
     import InfoHead from "$lib/InfoHead.svelte";
-    export let data;
     // import Img from '../lib/Img.svelte';
     import Nav from "../Nav.svelte";
 
@@ -38,17 +37,6 @@
 
 
 <body>
-<Nav></Nav>
-<!-- <aside class = "sidebar">
-    <h3 class = "sidebar">recipes</h3>
-    <ul>
-        {#each data.recipes as {id, name}}
-            <li><a href="../recipes/{id}" data-sveltekit-preload-data>{name}</a></li>
-        {/each}
-    </ul>
-    <a href = "../recipes" data-sveltekit-preload-data>see all recipes</a>
-</aside> -->
-
 <div class = "container">
     <h1>Recipe Input Form</h1>
         <label>
@@ -120,34 +108,11 @@
 </body>
 
 <style>
-    body {
-        background-color: whitesmoke;
-    }
-
-    aside.sidebar {
-        width: 25%;
-        max-width: 400px;
-        min-height: 100vh;
-        padding-bottom: 4rem;
-        padding: 2em;
-        border-radius: 30px;
-        border:hidden;
-        float:inline-start;
-        background-color: darksalmon;
-    }
-
     div {
         max-width: 400px;
         margin: auto;
         border: hidden;
         border-radius: 30px;
-    }
-
-    div.container {
-        min-height: 100vh;
-        padding-bottom: 4rem;
-        padding: 2em;
-        background-color: rgba(226, 255, 254, 0.959);
     }
 
     div.element {
@@ -167,10 +132,4 @@
     h3 {
         text-align: center;
     }
-
-    h3.sidebar {
-        text-align:left;
-    }
-    
-
 </style>

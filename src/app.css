@@ -10,3 +10,22 @@
 	--text-color: #000;
 	--theme-color: rgb(164, 229, 156);
 }
+
+body {
+	margin: 0;
+	color: var(--text-color);
+	background: var(--background-color);
+
+	background-image: none;
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	background-attachment: fixed;
+}
+
+.page-width {
+	max-width: 40rem;
+}
+
+.page-padding {
+	padding: 0 var(--page-padding);
+}

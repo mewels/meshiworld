@@ -10,7 +10,5 @@
 
 <InfoHead pagedescription = "yay!" pagetitle = {data.recipe.name} pageurl={$page.url}/>
 <body>
-    <Nav></Nav>
-
     <Recipe name = {data.recipe.name} ilist = {data.recipe.ingredients} slist = {data.recipe.steps}/>
 </body>
