@@ -1,6 +1,8 @@
 <script>
     import { page } from '$app/stores';
     import Nav from './Nav.svelte';
+    import '../app.css'
+
 </script>
 
 <a href="#main" class="skip-to-content">Skip to content</a>

@@ -5,10 +5,10 @@
 
 	--page-padding: 1rem;
 
-	--background-color: #ffdfcc;
-	--mid-grey: rgb(199, 199, 199);
-	--text-color: #000;
-	--theme-color: rgb(164, 229, 156);
+	--background-color: #faf4e7;
+	--mid-grey: rgb(180, 180, 180);
+	--text-color: #3a3221;
+	--theme-color: rgb(163, 89, 67);
 }
 
 body {
@@ -28,4 +28,23 @@ body {
 
 .page-padding {
 	padding: 0 var(--page-padding);
+}
+
+a.visited{
+    color: var(--text-color);
+}
+
+a {
+    color: var(--text-color);
+}
+
+h2 {
+    margin-top: 0;
+    text-align: center;
+    font-weight: 75;
+}
+
+h3 {
+    text-align: center;
+    font-weight: 50;
 }

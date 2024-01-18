@@ -9,6 +9,6 @@
 </script>
 
 <InfoHead pagedescription = "yay!" pagetitle = {data.recipe.name} pageurl={$page.url}/>
-<body>
-    <Recipe name = {data.recipe.name} ilist = {data.recipe.ingredients} slist = {data.recipe.steps}/>
-</body>
+<div>
+    <Recipe name = {data.recipe.name} user = {data.recipe.user} ilist = {data.recipe.ingredients} slist = {data.recipe.steps}/>
+</div>

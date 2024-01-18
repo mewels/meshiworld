@@ -8,6 +8,7 @@
     let ingredientlist = [{name: '', amount: ''}];
     let steplist = [{number: 1, action: ''}];
     let name = '';
+    let user = '';
 
     const addIngredient = () =>{
         ingredientlist = [...ingredientlist, {name: '', amount: ''}]
@@ -27,42 +28,65 @@
 
     $: compiledrecipe = {
         name: name,
+        user: user,
         ingredients: ingredientlist,
         steps: steplist
     };
+
+    function verify() {
+        let valid = false;
+        let ivalid = true;
+        let svalid = true;
+        for (i of ingredientlist) {
+            if ((i.name === '') || (i.amount === '')) {
+                ivalid = false;
+            }
+        }
+        for (s of steplist) {
+            if (s.action === '') {
+                svalid = false;
+            }
+        }
+        if ((name !== '') && (ivalid) && (svalid)) {
+            valid = true;
+        }
+        return valid;
+    }
 
 </script>
 
 <InfoHead pagedescription="> ______ /<" pagetitle ="hell world" pageurl = {$page.url}/>
 
+<div>
+    <h2>drop the method!</h2>
+        <div class = "element">
+            <label>
+                <input type = "text" placeholder = "recipe name" id = "name" name="name" bind:value = {name} required = "true" minlength = 1 size = 20/>
+            </label>
+        </div>
 
-<body>
-<div class = "container">
-    <h1>Recipe Input Form</h1>
-        <label>
-            recipe name: 
-            <input type = "text" id = "name" name="name" bind:value = {name} required minlength = 1 size = 20/>
-        </label>
-                
-        <h3>add ingredients</h3>
+        <div class = "element">
+            <label>
+                <input type = "text" placeholder = "your name" id = "user" name="user" bind:value = {user} minlength = 1 size = 10/>
+            </label>
+        </div>
+
+        <h3>ingredients</h3>
         {#each ingredientlist as a, i}
-            <div class = "element">
-                <label>
-                    name:  
-                    <input type = "text" id = {i} name="name" bind:value = {ingredientlist[i].name} required minlength = 1 size = 20
+            <div class = "element ingredient">
+                    <input type = "text" id = {i} placeholder="name of ingedient" name="name" bind:value = {ingredientlist[i].name} required minlength = 1 size = 20
                     />
-                </label>
-                <label>
-                    amount: 
-                    <input type = "text" id = {i} name="amount" bind:value = {ingredientlist[i].amount} required minlength = 1 size = 20/>
-                </label>
+                    <input type = "text" id = {i} placeholder = "amount of ingredient" name="amount" bind:value = {ingredientlist[i].amount} required minlength = 1 size = 20
+                    />
             </div>
         {/each}
 
-        <button on:click|preventDefault = {addIngredient}>Add</button>
-        <button on:click = {removeIngredient}>Remove</button>
+        <div class = "element">
+            <button on:click|preventDefault = {addIngredient}>Add</button>
+            <button on:click = {removeIngredient}>Remove</button>
+        </div>
 
-        <h3>add steps</h3>
+        <h3>steps</h3>
         {#each steplist as s, i}
         <div class = "element">
             <label>
@@ -72,8 +96,14 @@
         </div>
         {/each}
 
-        <button on:click|preventDefault = {addStep}>Add</button>
-        <button on:click = {removeStep}>Remove</button>
+        <div class = "element">
+            <button on:click|preventDefault = {addStep}>Add</button>
+            <button on:click = {removeStep}>Remove</button>
+        </div>
+
+        <p class = "notes">
+            at this time, recipes cannot be deleted or modified after submission - please make sure you're happy before submitting!!
+        </p>
         
         <div class = "submit">
             <form method="POST" action='?/create'>
@@ -83,53 +113,39 @@
                 </button>
             </form>
         </div>
-    
-    <!-- <div>
-        <form method="POST" action='?/search'>
-            <label>search: 
-                <input type = "text" name = "name" id = "name" autocomplete="off">
-            </label>
-        </form>
-    </div> -->
-
-    <br>
-    <br>
-
-    <div>
-        <form method="POST" action='?/delete'>
-            <label>
-                <button>
-                    delete delete delete
-                </button> 
-            </label>
-        </form>
-    </div>
 </div>
-</body>
 
 <style>
-    div {
-        max-width: 400px;
-        margin: auto;
-        border: hidden;
-        border-radius: 30px;
+    div.element {
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1;
+        display: flex;
+        flex-wrap:wrap;
+        justify-content: center;
     }
 
-    div.element {
-        margin-top: 1em;
-        margin-bottom: 1em;
-        line-height: 1;
+    div.ingredient > input {
+        width: 10rem;
+        margin: .5rem;
+        margin-top: .5em;
+        margin-bottom: .5em;
     }
 
     div.submit {
         margin: 2em;
     }
 
-    h1 {
+    p.notes {
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 15px;
         text-align: center;
+        max-width: 20rem;
+        margin:auto;
     }
 
     h3 {
-        text-align: center;
+        margin-bottom: 0;
     }
 </style>

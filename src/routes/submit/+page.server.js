@@ -20,24 +20,7 @@ export const actions = {
         db.addRecipe(recipe);
     },
 
-    delete: async () => {
-        db.deleteAll();
-    },
-
     list: async () => {
         db.listRecipes();
-    },
-
-    isearch: async ({request}) => {
-        const data = await request.formData();
-        db.searchIngredient(data.get("ingredient"));
-    },
-
-    search: async ({request}) => {
-        const data = await request.formData();
-        console.log("Name search");
-        db.searchName(data.get("name"));
-        // console.log("Ingredient search");
-        // db.searchIngredient(data.get("name"));
     },
 }   

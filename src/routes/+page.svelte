@@ -4,6 +4,16 @@
     import Nav from './Nav.svelte';
 </script>
 
-<body>
-    <InfoHead pagedescription = '^ ____ ^' pagetitle = 'bagelzone' pageurl = {$page.url}/>
-</body>
+<InfoHead pagedescription = '^ ____ ^' pagetitle = 'bagelzone' pageurl = {$page.url}/>
+
+<div>
+    <div>
+        <form method="POST" action='?/delete'>
+            <label>
+                <button>
+                    delete delete delete
+                </button> 
+            </label>
+        </form>
+    </div>
+</div>

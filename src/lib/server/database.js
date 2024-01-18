@@ -7,6 +7,7 @@ export async function addRecipe(recipe) {
     await db.recipe.create({ 
         data: {
             name: recipeobject.name.toLowerCase(),
+            user: recipeobject.user.toLowerCase(),
             ingredients: {create: recipeobject.ingredients},
             steps: {create: recipeobject.steps},
         }})
