@@ -7,7 +7,7 @@
 
 <div class = 'recipe'>
     <h2>{name}</h2>
-    <header class = "user">submitted by {user === '' ? 'anon' : {user}}</header>
+    <header class = "user">submitted by {user === '' ? 'anon' : user}</header>
     <h3>ingredients</h3>
     <ul class = 'ingredients'>
         {#each ilist as ingredient}

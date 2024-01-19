@@ -13,7 +13,7 @@
     var searchkey = 'nsearch';    
 </script>
 
-<InfoHead pagedescription="0 ____ 0" pagetitle ="Bagel's collaborative cookbook!" pageurl = {$page.url}/>
+<InfoHead pagedescription="0 ____ 0" pagetitle ="meshi  . world" pageurl = {$page.url}/>
 
 <div>
     <form method="POST" action='?/{searchkey}'>
@@ -68,11 +68,6 @@
     }
 
     .recipes {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .search {
         display: flex;
         flex-wrap: wrap;
     }
