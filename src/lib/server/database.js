@@ -1,6 +1,10 @@
 import { PrismaClient } from '@prisma/client'
 export const db = new PrismaClient()
 
+String.prototype.toTitleCase = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();});
+};
+
 // PRISMA FUNCTIONS
 export async function addRecipe(recipe) {
     const recipeobject = JSON.parse(recipe);
@@ -49,9 +53,23 @@ export async function deleteRecipe(id) {
 export async function searchName(arg) {
     const recipes = await db.recipe.findMany({
         where: {
-            name: {
-                contains: arg,
-            },
+            OR: [
+                {
+                    name: {
+                        contains: arg.toLowerCase(),
+                    },
+                },
+                {
+                    name: {
+                        contains: arg.toTitleCase(),
+                    },
+                },
+                {
+                    name: {
+                        contains: arg.toUpperCase()
+                    }
+                }
+            ],
         },
         // include: {
         //     ingredients: true,
@@ -69,9 +87,23 @@ export async function searchIngredient(arg) {
     let recipes = [];
     const ingredients = await db.ingredient.findMany({
         where: {
-            name: {
-                contains: arg,
-            },
+            OR: [
+                {
+                    name: {
+                        contains: arg.toLowerCase(),
+                    },
+                },
+                {
+                    name: {
+                        contains: arg.toTitleCase(),
+                    },
+                },
+                {
+                    name: {
+                        contains: arg.toUpperCase()
+                    }
+                }
+            ],
         },
     })
 
