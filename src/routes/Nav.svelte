@@ -33,6 +33,7 @@
                             aria-current={aria_current($page.url.pathname, href)}
 							aria-label={text}
 							role="menuitem"
+							data-sveltekit-preload-data
                         >
                             {text}
                         </a>
