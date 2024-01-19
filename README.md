@@ -1,38 +1,17 @@
-# create-svelte
+# meshi.world
+this is a collaborative recipe book for me and my friends to use!
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+i built it with svelte and sveltekit. it uses a posgreSQL database with prisma to store recipes. if you find any issues, i'd appreciate if you let me know about them ~ this is my first website i have built besides my simple little index page.
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## playing with it 
+if you wanna play around with this, make sure to run 
 
 ```bash
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+this will install all required dependencies, and start a local development server.
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## thanks to ! 
+[merilynn](https://github.com/furudean) for so so so much help and advice. i am grateful for your patience and wisdom in helping me when i got stuck.
