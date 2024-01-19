@@ -49,7 +49,8 @@
     }
     .notes {
         white-space: pre-wrap;
-        margin-left: 5rem;
+        margin-left: 4rem;
+        margin-right: 4rem;
     }
 
     .steps {
