@@ -68,7 +68,7 @@ export async function searchName(arg) {
                     name: {
                         contains: arg.toUpperCase()
                     }
-                }
+                },
             ],
         },
         // include: {
@@ -102,7 +102,7 @@ export async function searchIngredient(arg) {
                     name: {
                         contains: arg.toUpperCase()
                     }
-                }
+                },
             ],
         },
     })
