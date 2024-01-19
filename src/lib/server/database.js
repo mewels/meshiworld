@@ -8,6 +8,7 @@ export async function addRecipe(recipe) {
         data: {
             name: recipeobject.name.toLowerCase(),
             user: recipeobject.user.toLowerCase(),
+            notes: recipeobject.notes.toLowerCase(),
             ingredients: {create: recipeobject.ingredients},
             steps: {create: recipeobject.steps},
         }})

@@ -9,6 +9,8 @@
     let steplist = [{number: 1, action: ''}];
     let name = '';
     let user = '';
+    let notes = '';
+
 
     const addIngredient = () =>{
         ingredientlist = [...ingredientlist, {name: '', amount: ''}]
@@ -29,6 +31,7 @@
     $: compiledrecipe = {
         name: name,
         user: user,
+        notes: notes,
         ingredients: ingredientlist,
         steps: steplist
     };
@@ -71,6 +74,10 @@
             <label>
                 <input type = "text" placeholder = "your name" id = "user" name="user" bind:value = {user} minlength = 1 size = 10/>
             </label>
+        </div>
+
+        <div class = "element">
+            <textarea bind:value = {notes} name = "notes" id = "notes" placeholder="notes (optional)" size = 30/>
         </div>
 
         <h3>ingredients</h3>

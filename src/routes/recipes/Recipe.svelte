@@ -1,6 +1,7 @@
 <script>
     export let name = '';
     export let user = '';
+    export let notes = '';
     export let ilist = [];
     export let slist = [];
 </script>
@@ -8,6 +9,17 @@
 <div class = 'recipe'>
     <h2>{name}</h2>
     <header class = "user">submitted by {user === '' ? 'anon' : user}</header>
+
+    {#if notes !== ''}
+        <h3>notes</h3>
+        <div class = "notes">
+            <p> 
+                    {notes}
+            </p>
+        </div>
+    {/if}
+
+
     <h3>ingredients</h3>
     <ul class = 'ingredients'>
         {#each ilist as ingredient}
@@ -35,7 +47,10 @@
         font-size: 16px;
         text-align: center;
     }
-
+    .notes {
+        white-space: pre-wrap;
+        margin-left: 5rem;
+    }
     h2 {
         margin-bottom: 0;
     }

@@ -28,6 +28,7 @@ model Recipe {
   id          Int          @id @default(autoincrement())
   name        String
   user        String
+  notes       String
   timestamp   DateTime     @default(now())
   ingredients Ingredient[]
   steps       Step[]
