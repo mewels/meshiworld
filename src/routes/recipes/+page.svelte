@@ -1,5 +1,6 @@
 <script>
     import {page} from '$app/stores';
+    import { enhance } from '$app/forms';
     import InfoHead from "$lib/InfoHead.svelte";
     import Nav from '../Nav.svelte';
 
@@ -16,7 +17,7 @@
 <InfoHead pagedescription="0 ____ 0" pagetitle ="meshi  . world" pageurl = {$page.url}/>
 
 <div>
-    <form method="POST" action='?/{searchkey}'>
+    <form method="POST" action='?/{searchkey}' use:enhance>
         <label>
             <input type = "text"  placeholder = 'Search by name or ingredient' name = "searchkey" id = "searchkey"  autocomplete="off"
             value = {form?.results === undefined ? '' : ''}
