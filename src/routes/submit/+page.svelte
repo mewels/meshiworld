@@ -58,7 +58,7 @@
 <InfoHead pagedescription="> ______ /<" pagetitle ="hell world" pageurl = {$page.url}/>
 
 <div>
-    <h2>drop the method!</h2>
+    <h2>drop the method~</h2>
         <div class = "element">
             <label>
                 <input type = "text" placeholder = "recipe name" id = "name" name="name" bind:value = {name} required = "true" minlength = 1 size = 20/>
