@@ -23,7 +23,7 @@
 
 <div class="outer page-width page padding">
     <div class = "container">
-        <header>bagel's collaborative cookbook ♡</header>
+        <header>meshi  ♡  world</header>
         <nav aria-label="bagelzone">
             <ul role ="menubar" aria-label="main navigation">
                 {#each Object.entries(links) as [href, text]}
