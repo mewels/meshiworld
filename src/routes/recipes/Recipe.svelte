@@ -51,6 +51,10 @@
         white-space: pre-wrap;
         margin-left: 5rem;
     }
+
+    .steps {
+        white-space:pre-wrap;
+    }
     h2 {
         margin-bottom: 0;
     }

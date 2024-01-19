@@ -100,7 +100,7 @@
         <div class = "element">
             <label>
                 [{steplist[i].number}]:
-                <input type = "text" id = {i} name="action" bind:value = {steplist[i].action} required minlength = 1 size = 20/>
+                <textarea id = {i} name="action" bind:value = {steplist[i].action} required minlength = 1 size = 20/>
             </label>
         </div>
         {/each}
