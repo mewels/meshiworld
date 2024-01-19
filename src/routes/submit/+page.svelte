@@ -58,7 +58,9 @@
 <InfoHead pagedescription="> ______ /<" pagetitle ="hell world" pageurl = {$page.url}/>
 
 <div>
-    <h2>drop the method~</h2>
+    <div class = "submit">
+    <form method="POST" action='?/create'>
+        <h2>drop the method~</h2>
         <div class = "element">
             <label>
                 <input type = "text" placeholder = "recipe name" id = "name" name="name" bind:value = {name} required = "true" minlength = 1 size = 20/>
@@ -105,14 +107,13 @@
             at this time, recipes cannot be deleted or modified after submission - please make sure you're happy before submitting!!
         </p>
         
-        <div class = "submit">
-            <form method="POST" action='?/create'>
-                <input type = "hidden" name = "compiledrecipe" id = "compiledrecipe" value = {JSON.stringify(compiledrecipe)}>
-                <button>
-                    submit recipe
-                </button>
-            </form>
-        </div>
+        
+        <input type = "hidden" name = "compiledrecipe" id = "compiledrecipe" value = {JSON.stringify(compiledrecipe)}>
+        <button>
+            submit recipe
+        </button>
+    </form>
+    </div>
 </div>
 
 <style>
