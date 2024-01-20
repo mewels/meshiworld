@@ -53,23 +53,10 @@ export async function deleteRecipe(id) {
 export async function searchName(arg) {
     const recipes = await db.recipe.findMany({
         where: {
-            OR: [
-                {
-                    name: {
-                        contains: arg.toLowerCase(),
+                name: {
+                        contains: arg,
+                        mode: 'insensitive',
                     },
-                },
-                {
-                    name: {
-                        contains: arg.toTitleCase(),
-                    },
-                },
-                {
-                    name: {
-                        contains: arg.toUpperCase()
-                    }
-                },
-            ],
         },
         // include: {
         //     ingredients: true,
@@ -87,23 +74,10 @@ export async function searchIngredient(arg) {
     let recipes = [];
     const ingredients = await db.ingredient.findMany({
         where: {
-            OR: [
-                {
-                    name: {
-                        contains: arg.toLowerCase(),
-                    },
-                },
-                {
-                    name: {
-                        contains: arg.toTitleCase(),
-                    },
-                },
-                {
-                    name: {
-                        contains: arg.toUpperCase()
-                    }
-                },
-            ],
+            name: {
+                    contains: arg,
+                    mode: 'insensitive',
+            },
         },
     })
 
