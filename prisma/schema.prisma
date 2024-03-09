@@ -9,10 +9,9 @@ datasource db {
 }
 
 model siteUser {
-  id       Int      @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   username String
   password String
-  recipes  Recipe[]
 }
 
 model Ingredient {
@@ -39,6 +38,4 @@ model Recipe {
   timestamp   DateTime     @default(now())
   ingredients Ingredient[]
   steps       Step[]
-  userId      Int?
-  author      siteUser?    @relation(fields: [userId], references: [id])
 }
