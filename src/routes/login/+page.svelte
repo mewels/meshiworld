@@ -15,7 +15,7 @@
     <form method='POST' action = "?/login">
         <div class = "element">
             <label>
-                <input type = "text" placeholder = "username" id = "name" name="name" bind:value = {name} required = "true" minlength = 1 size = 20 list = ''/>
+                <input type = "text" placeholder = "username" id = "name" name="name" bind:value = {name} pattern = "\w+" required = "true" minlength = 1 size = 20 list = ''/>
             </label>
         </div>
 
