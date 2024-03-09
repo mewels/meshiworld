@@ -116,6 +116,38 @@ export async function getUserRecipes(arg) {
     return recipes;
 }
 
+export async function updateRecipe(arg) {
+    const recipeobject = JSON.parse(arg);
+    for (const ingredient of recipeobject.ingredients) {
+        delete ingredient.id;
+        delete ingredient.recipeId;
+    }
+    for (const step of recipeobject.steps) {
+        delete step.id;
+        delete step.recipeId;
+    }
+    await db.recipe.update({ 
+        where: {
+            id: recipeobject.id,
+        },
+        data: {
+            name: recipeobject.name.toLowerCase(),
+            user: recipeobject.user.toLowerCase(),
+            notes: recipeobject.notes.toLowerCase(),
+            ingredients: {
+                deleteMany:{},
+                create: 
+                    recipeobject.ingredients,
+            },
+            steps: {
+                deleteMany:{},
+                create: 
+                    recipeobject.steps,
+            },
+            userId: Number(recipeobject.userid),
+        }})
+}
+
 export async function searchName(arg) {
     const recipes = await db.recipe.findMany({
         where: {

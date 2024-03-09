@@ -12,4 +12,15 @@
 <div>
     <Recipe name = {data.recipe.name} user = {data.recipe.user} notes = {data.recipe.notes} ilist = {data.recipe.ingredients} slist = {data.recipe.steps} userid = {data.recipe.userId}
     />
+
+    {#if data.recipe.user === data.sessionuser.username}
+        <form method='POST' action='?/edit'>
+            <button class = "edit">
+                edit
+            </button>
+        </form>
+    {/if}
 </div>
+
+<style>
+</style>
