@@ -1,9 +1,14 @@
 <script>
-    export let sessionuser;
+    export let pageuser;
     export let recipes;
+    export let allrecipes;
+    export let allusers;
+    export let sessionuser;
+
+    let recipeid = null;
 </script>
 <div class="User">
-    <h2>{sessionuser}'s page :)</h2>
+    <h2>{pageuser}'s page :)</h2>
 
 
     <div class = 'recipelist'>
@@ -13,8 +18,31 @@
         {/each}
     </div>
 
+    {#if sessionuser === 'mara' && sessionuser === pageuser}
+        <form method ='POST' action="?/claim">
+            <label>
+                <select name = "recipeid">
+                    {#each allrecipes as {id, name}}
+                    <option value = {id}>{name}</option>
+                    {/each}
+                </select>
+            </label>
 
-    {#if sessionuser}
+            <label>
+                <select name = "userid">
+                    {#each allusers as {id, username}}
+                    <option value = {id}>{username}</option>
+                    {/each}
+                </select>
+            </label>
+            <button>
+                do it!
+            </button>
+        </form>
+    {/if}
+
+
+    {#if sessionuser && sessionuser === pageuser}
         <form method='POST' action="?/logout">
             <button>
                 logout
@@ -26,5 +54,12 @@
 </div>
 
 <style>
+    li {
+        list-style-type: none;
+        padding-left: 0px;
+    }
 
+    div.recipelist {
+        padding-bottom: 3rem;
+    }
 </style>

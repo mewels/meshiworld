@@ -20,6 +20,19 @@ export async function addRecipe(recipe) {
         }})
 }
 
+export async function claimRecipe(userid, recipeid) {
+    const tempuser = await getUserFromId(userid);
+    await db.recipe.update({
+        where: {
+            id: Number(recipeid),
+        },
+        data: {
+            user: tempuser.username,
+            userId: Number(userid),
+        },
+    })
+}
+
 export async function createUser(user)
 {
     const userobject = user;
@@ -80,6 +93,17 @@ export async function getUser(arg) {
     return user;
 }
 
+export async function getUserFromId(arg) {
+    const user = await db.siteUser.findFirst({
+        where: {
+            id: {
+                equals: Number(arg),
+            },
+        },
+    });
+    return user;
+}
+
 export async function getUserRecipes(arg) {
     const user = await getUser(arg);
     const recipes = await db.recipe.findMany({
@@ -133,6 +157,11 @@ export async function searchIngredient(arg) {
 export async function listAll() {
     const recipes = await db.recipe.findMany({});
     return recipes;
+}
+
+export async function listAllUsers() {
+    const users = await db.siteUser.findMany({});
+    return users;
 }
 
 export async function getRecipe(id) {

@@ -9,4 +9,4 @@
 
 <InfoHead pagedescription = "yay!" pagetitle = {data.username} pageurl={$page.url}/>
 
-<User sessionuser = {data.username} recipes = {data.recipes}/>
+<User pageuser = {data.username} recipes = {data.recipes} allrecipes = {data.allrecipes} allusers = {data.allusers} sessionuser = {data.sessionuser.username}/>

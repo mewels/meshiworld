@@ -1,18 +1,30 @@
 import {getUser} from '$lib/server/database.js';
+import * as db from '$lib/server/database.js';
 import { redirect } from '@sveltejs/kit';
-import { getUserRecipes } from '../../../lib/server/database.js';
+import { getUserRecipes, listAll, listAllUsers } from '../../../lib/server/database.js';
 
 
 export async function load({params}) {
     const user = await getUser(params.risu);
+    const allrecipes = await listAll();
+    const allusers = await listAllUsers();
     const recipes = await getUserRecipes(params.risu);
     return {
         username: user.username,
-        recipes: recipes
+        recipes: recipes,
+        allrecipes: allrecipes,
+        allusers: allusers
     };
 }
 
 export const actions = {
+    claim: async ({request}) => {
+        const data = await request.formData();
+        const recipeid = data.get("recipeid");
+        const userid = data.get("userid");
+        await db.claimRecipe(userid,recipeid);
+    },
+
     logout: async ({cookies,locals}) => {
         cookies.delete("Authorization", {path: '/'});
         locals.user = null;
