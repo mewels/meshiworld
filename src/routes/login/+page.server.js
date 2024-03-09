@@ -40,16 +40,13 @@ export const actions = {
         const result = await db.getUser(user);
         if (result !== null && result.length !== 0)
         {
-            console.log("hmmm")
             return fail(403, {message: "user already exists :("})
         }
-        console.log("hehe")
         const hashed = await bcrypt.hash(pass, 10);
         const compileduser = {
             name: user,
             password: hashed
         }
-        console.log(compileduser)
         await db.createUser(compileduser);
         cookies.set("Authorization", user+":"+pass, {path: '/'} );
         throw redirect(303, '/user/'+user);
