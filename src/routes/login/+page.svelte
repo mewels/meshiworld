@@ -1,6 +1,7 @@
 <script>
     import {page} from '$app/stores';
     import InfoHead from "$lib/InfoHead.svelte";
+    import {dev} from '$app/environment';
 
     let name = '';
     let pass = '';
@@ -41,11 +42,14 @@
         </form>
     {/if}
 
-    <form method='POST' action="?/delete">
-        <button>
-            delete all users
-        </button>
-    </form>
+    {#if dev}
+        <form method='POST' action="?/delete">
+            <button>
+                delete all users
+            </button>
+        </form>
+    {/if}
+
 
     {#if form}
 		{form?.message ?? 'something went wrong'}

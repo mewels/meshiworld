@@ -1,12 +1,14 @@
 import * as db from '$lib/server/database.js';
 import { fail, redirect } from '@sveltejs/kit';
 import bcrypt from 'bcrypt';
+import {dev} from '$app/environment';
 
 export const actions = {
     delete: async ({cookies}) => {
-        await db.deleteUsers();
-        cookies.delete("username", {path: '/'});
-        cookies.delete("password", {path: '/'});
+        if (dev) {
+            await db.deleteUsers();
+            cookies.delete("Authorization", {path: '/'});
+        }
     },
     
     login: async ({request, cookies}) => {
