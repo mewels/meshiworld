@@ -4,12 +4,18 @@
     export let notes = '';
     export let ilist = [];
     export let slist = [];
+    export let userid;
 </script>
 
 <div class = 'recipe'>
     <h2>{name}</h2>
+    {#if userid}
+    <header class = "user">submitted by 
+        <a href = "https://meshi.world/user/{user}">{user}
+        </a></header>
+    {:else}
     <header class = "user">submitted by {user === '' ? 'anon' : user}</header>
-
+    {/if}
     {#if notes !== ''}
         <h3>notes</h3>
         <div class = "notes">
