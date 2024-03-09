@@ -2,12 +2,12 @@
     import { page } from '$app/stores';
     import Nav from './Nav.svelte';
     import '../app.css'
-
+	export let data;
 </script>
 
 <a href="#main" class="skip-to-content">Skip to content</a>
 <div class="container">
-	<Nav></Nav>
+	<Nav sessionuser = {data.sessionuser}></Nav>
 	<main id="main" class="page-width page-padding">
 		<slot />
 	</main>

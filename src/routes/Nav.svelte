@@ -1,11 +1,21 @@
 <script>
     import {page} from '$app/stores'
-
-    const links = {
-        '/' : 'home',
-        '/recipes' : 'recipes',
-        '/submit' : 'submit'
-    }
+	export let sessionuser;
+	let links = {
+			'/' : 'home',
+			'/recipes' : 'recipes',
+			'/submit' : 'submit',
+			'/login' : 'log in',
+		}
+	if (sessionuser !== undefined && sessionuser !== null && sessionuser?.username !== null && sessionuser.username !== undefined && sessionuser.username !== ' ') {
+		const userpath = '/user/' + sessionuser.username;
+		links = {
+			'/' : 'home',
+			'/recipes' : 'recipes',
+			'/submit' : 'submit',
+			[userpath] : sessionuser.username,
+		}
+	}
 
     /**
 	 * @param {string} current_path

@@ -8,6 +8,13 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
+model siteUser {
+  id       Int      @id @default(autoincrement())
+  username String
+  password String
+  recipes  Recipe[]
+}
+
 model Ingredient {
   id       Int     @id @default(autoincrement())
   name     String
@@ -32,4 +39,6 @@ model Recipe {
   timestamp   DateTime     @default(now())
   ingredients Ingredient[]
   steps       Step[]
+  userId      Int?
+  author      siteUser?    @relation(fields: [userId], references: [id])
 }

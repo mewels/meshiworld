@@ -10,6 +10,8 @@
     let name = '';
     let user = '';
     let notes = '';
+    let userid = null;
+    export let data;
 
 
     const addIngredient = () =>{
@@ -28,33 +30,19 @@
         steplist = steplist.slice(0, steplist.length-1)
     };
 
+    $: if (data.sessionuser) {
+        user = data.sessionuser.username
+        userid = data.sessionuser.id
+    }
+
     $: compiledrecipe = {
         name: name,
         user: user,
         notes: notes,
         ingredients: ingredientlist,
-        steps: steplist
+        steps: steplist,
+        userid: userid
     };
-
-    function verify() {
-        let valid = false;
-        let ivalid = true;
-        let svalid = true;
-        for (i of ingredientlist) {
-            if ((i.name === '') || (i.amount === '')) {
-                ivalid = false;
-            }
-        }
-        for (s of steplist) {
-            if (s.action === '') {
-                svalid = false;
-            }
-        }
-        if ((name !== '') && (ivalid) && (svalid)) {
-            valid = true;
-        }
-        return valid;
-    }
 
 </script>
 
@@ -70,11 +58,18 @@
             </label>
         </div>
 
-        <div class = "element">
-            <label>
-                <input type = "text" placeholder = "your name" id = "user" name="user" bind:value = {user} minlength = 1 size = 10/>
-            </label>
-        </div>
+        {#if data.sessionuser}
+            <div class = "usertag" style="text-align:center;">submitting from 
+                <a href = "https://meshi.world/user/{user}">{user}
+                </a>
+            </div>
+        {:else}
+            <div class = "element">
+                <label>
+                    <input type = "text" placeholder = "your name" id = "user" name="user" bind:value = {user} minlength = 1 size = 10/>
+                </label>
+            </div>
+        {/if}
 
         <div class = "element">
             <textarea bind:value = {notes} name = "notes" id = "notes" placeholder="notes (optional)" size = 30/>
@@ -142,6 +137,10 @@
 
     div.submit {
         margin: 2em;
+    }
+
+    div.usertag {
+        font-size: 16px;
     }
 
     p.notes {

@@ -8,6 +8,7 @@ String.prototype.toTitleCase = function () {
 // PRISMA FUNCTIONS
 export async function addRecipe(recipe) {
     const recipeobject = JSON.parse(recipe);
+
     await db.recipe.create({ 
         data: {
             name: recipeobject.name.toLowerCase(),
@@ -15,13 +16,30 @@ export async function addRecipe(recipe) {
             notes: recipeobject.notes.toLowerCase(),
             ingredients: {create: recipeobject.ingredients},
             steps: {create: recipeobject.steps},
+            userId: recipeobject.userid,
         }})
+}
+
+export async function createUser(user)
+{
+    const userobject = user;
+    await db.siteUser.create({
+        data: {
+            username : userobject.name,
+            password : userobject.password,
+        }
+    })
 }
 
 export async function deleteAll() {
     await db.ingredient.deleteMany({});
     await db.step.deleteMany({});
     await db.recipe.deleteMany({});
+    await db.siteUser.deleteMany({});
+}
+
+export async function deleteUsers() {
+    await db.siteUser.deleteMany({});
 }
 
 export async function deleteRecipe(id) {
@@ -48,6 +66,30 @@ export async function deleteRecipe(id) {
             recipeId: delId,
         },
     })
+}
+
+export async function getUser(arg) {
+    const user = await db.siteUser.findFirst({
+        where: {
+            username: {
+                equals: arg,
+                mode: 'insensitive',
+            },
+        },
+    });
+    return user;
+}
+
+export async function getUserRecipes(arg) {
+    const user = await getUser(arg);
+    const recipes = await db.recipe.findMany({
+        where: {
+            userId: {
+                equals: user.id
+            },
+        },
+    });
+    return recipes;
 }
 
 export async function searchName(arg) {
