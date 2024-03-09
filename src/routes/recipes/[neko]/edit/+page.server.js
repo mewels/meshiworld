@@ -1,5 +1,5 @@
 import {getRecipe} from '$lib/server/database.js';
-import { redirect,fail } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import * as db from '$lib/server/database.js';
 
 export async function load({params}) {
@@ -14,7 +14,6 @@ export const actions = {
         const data = await request.formData();
         const recipe =  data.get("compiledrecipe");
         const getid = await getRecipe(params.neko);
-        // console.log(getid);
         await db.updateRecipe(recipe);
         throw redirect(303, '/recipes/'+getid.id)
     }
