@@ -105,10 +105,11 @@
             <button on:click = {removeStep}>Remove</button>
         </div>
 
+        {#if !data.sessionuser}
         <p class = "notes">
-            at this time, recipes cannot be deleted or modified after submission - please make sure you're happy before submitting!!
+            recipes can be modified if you're logged in. make an account by pressing 'log in' above :3
         </p>
-        
+        {/if}
         
         <input type = "hidden" name = "compiledrecipe" id = "compiledrecipe" value = {JSON.stringify(compiledrecipe)}>
         <button>
