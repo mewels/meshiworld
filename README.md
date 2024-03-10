@@ -1,7 +1,7 @@
 # meshi.world
 this is a collaborative recipe book for me and my friends to use!
 
-i built it with svelte and sveltekit. it uses a posgreSQL database with prisma to store recipes. if you find any issues, i'd appreciate if you let me know about them ~ this is my first website i have built besides my simple little index page.
+i built it with svelte and sveltekit. it uses a postgreSQL database with prisma to store recipes. if you find any issues, i'd appreciate if you let me know about them ~ this is my first website i have built besides my simple little index page.
 
 ## playing with it 
 if you wanna play around with this, make sure to run 
