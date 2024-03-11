@@ -1,12 +1,11 @@
 <script>
-    export let ilink = 'image link';
-    export let icaption = 'image caption'
-    export let ialt = 'alt text';
+    export let link = 'image link';
+    export let text = 'image text';
     
     export let image = {
-        link : ilink,
-        caption : icaption,
-        alt : ialt
+        link : link,
+        caption : text,
+        alt : text
     };
 
 </script>

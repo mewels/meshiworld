@@ -116,11 +116,6 @@
             <button on:click|preventDefault = {addStep}>Add</button>
             <button on:click = {removeStep}>Remove</button>
         </div>
-
-        <p class = "notes">
-            at this time, recipes cannot be deleted or modified after submission - please make sure you're happy before submitting!!
-        </p>
-        
         
         <input type = "hidden" name = "compiledrecipe" id = "compiledrecipe" value = {JSON.stringify(compiledrecipe)}>
         <button on:click ={updatelists}>

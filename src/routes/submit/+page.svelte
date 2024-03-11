@@ -59,7 +59,7 @@
         </div>
 
         {#if data.sessionuser}
-            <div class = "usertag" style="text-align:center;">submitting from 
+            <div class = "usertag" style="text-align:center;">submitting as 
                 <a href = "https://meshi.world/user/{user}">{user}
                 </a>
             </div>
