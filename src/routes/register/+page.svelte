@@ -5,6 +5,7 @@
 
     let name = '';
     let pass = '';
+    let confpass = ''
     export let form;
     export let data;
 </script>
@@ -12,7 +13,7 @@
 <InfoHead pagedescription = '^ ____ ^' pagetitle = 'bagelzone' pageurl = {$page.url}/>
 
 <div>
-    <form method='POST' action = "?/login">
+    <form method='POST' action = "?/register">
         <div class = "element">
             <label>
                 <input type = "text" placeholder = "username" id = "name" name="name" bind:value = {name} pattern = "\w+" required = "true" minlength = 1 size = 20 list = ''/>
@@ -24,9 +25,15 @@
                 <input type = "password" placeholder = "password" id = "pass" name="pass" bind:value = {pass} required = "true" minlength = 1 size = 20/>
             </label>
         </div>
+
+        <div class = "element">
+            <label>
+                <input type = "password" placeholder = "confirm password" id = "confpass" name="confpass" bind:value = {confpass} required = "true" minlength = 1 size = 20/>
+            </label>
+        </div>
         
         <button>
-            log in
+            register
         </button>
     </form>
     
@@ -46,11 +53,9 @@
         </form>
     {/if}
 
-    <div style="text-align:center"> need an account?</div> 
     <div class = "element">
-        <a href="/register">sign up here</a>
+    <a href="/login">log in instead</a>
     </div>
-
 
     {#if form}
 		{form?.message ?? 'something went wrong'}

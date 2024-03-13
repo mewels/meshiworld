@@ -32,25 +32,4 @@ export const actions = {
         cookies.delete("Authorization", {path: '/'});
         locals.user = null;
     },
-    
-    register: async({request, cookies}) => {
-        const data = await request.formData();
-        const user =  data.get("name");
-        const pass = data.get("pass");
-        const result = await db.getUser(user);
-        if (result !== null && result.length !== 0)
-        {
-            return fail(403, {message: "user already exists :("})
-        }
-        const hashed = await bcrypt.hash(pass, 10);
-        const compileduser = {
-            name: user,
-            password: hashed
-        }
-        await db.createUser(compileduser);
-        cookies.set("Authorization", user+":"+pass, {path: '/'} );
-        throw redirect(303, '/user/'+user);
-    },
-
-
 }
