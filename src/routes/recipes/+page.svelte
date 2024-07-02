@@ -26,15 +26,21 @@
         </label>
     </form>
 
+
     <div class = "radios">
-    {#each ["nsearch", "isearch"] as searchtype}
+    {#each ["nsearch", "isearch", "usearch"] as searchtype}
         <label>
             <input type = "radio" name = "search" value = {searchtype} bind:group = {searchkey} />
-            {searchtype === "nsearch" ? "name" : "ingredient"}
+            {#if searchtype === "nsearch"}
+            name
+            {:else if searchtype === 'isearch'}
+            ingredient
+            {:else if searchtype === 'usearch'}
+            user
+            {/if}
         </label>
-    {/each}
+        {/each}
     </div>
-
     
     <div class = recipes>
         <ul>

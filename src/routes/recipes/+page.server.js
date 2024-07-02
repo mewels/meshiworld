@@ -1,6 +1,6 @@
 import {listAll} from '$lib/server/database.js';
 import {searchName} from '$lib/server/database.js';
-import {searchIngredient} from '../../lib/server/database';
+import {getUserRecipes, searchIngredient} from '../../lib/server/database';
 
 
 export async function load() {
@@ -23,6 +23,14 @@ export const actions = {
     nsearch: async ({request}) => {
         const data = await request.formData();
         const results = await searchName(data.get("searchkey"))
+        return {
+            results: results
+        };
+    },
+
+    usearch: async ({request}) => {
+        const data = await request.formData();
+        const results = await getUserRecipes(data.get("searchkey"))
         return {
             results: results
         };
