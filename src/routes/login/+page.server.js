@@ -19,7 +19,9 @@ export const actions = {
         if(result === null || result.length === 0) {
             return fail(400, {message: "could not find user"});
         }
-        if (await bcrypt.compare(pass, result.password)) {
+
+        const match = await bcrypt.compare(pass, result.password)
+        if (match) {
             cookies.set("Authorization", user+":"+pass, {path: '/'} );
             throw redirect(303, '/user/'+user);
         }

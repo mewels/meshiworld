@@ -82,7 +82,7 @@ export async function deleteRecipe(id) {
 }
 
 export async function getUser(arg) {
-    const user = await db.siteUser.findMany({
+    const user = await db.siteUser.findFirst({
         where: {
             username: {
                 equals: arg,
