@@ -49,8 +49,8 @@
                     <li><a href="/recipes/{id}" data-sveltekit-preload-data>{name}</a></li>
                 {/each}
             {:else}
-                {#if Object.is(form?.results, [])}
-                    <p>No results found 0 ____ o</p>
+                {#if Object.is(form?.results, []) ||  form?.results.length === 0}
+                    <p>No results found</p>
                 {:else} 
                     {#each form?.results as {id, name}}
                         <li><a href="/recipes/{id}" data-sveltekit-preload-data>{name}</a></li>
