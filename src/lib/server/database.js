@@ -9,15 +9,54 @@ String.prototype.toTitleCase = function () {
 export async function addRecipe(recipe) {
     const recipeobject = JSON.parse(recipe);
 
-    await db.recipe.create({ 
+    let sectionlist = [];
+
+    var temp = await db.recipe.create({ 
         data: {
             name: recipeobject.name.toLowerCase(),
             user: recipeobject.user.toLowerCase(),
             notes: recipeobject.notes.toLowerCase(),
-            ingredients: {create: recipeobject.ingredients},
-            steps: {create: recipeobject.steps},
             userId: recipeobject.userid,
-        }})
+        },
+        include: {
+            sections: true,
+        },
+    })
+
+    for (const section of recipeobject.sections)
+    {        
+        var sobject = await db.section.create({
+            data: {
+                number: section.number,
+                title: section.title.toLowerCase(),
+                ingredients: {create: section.ingredients},
+                steps: {create: section.steps},
+                recipeId: temp.id,
+            },
+            include: {
+                ingredients: true,
+                steps: true,
+            },
+        })
+        sectionlist.push({id: sobject.id});
+    }
+
+    temp = await db.recipe.update({
+        where: {id: temp.id},
+        data: {
+            sections: {
+                connect: sectionlist,
+            },
+        },
+        include: {
+            sections: {
+               include: {
+                    ingredients: true,
+                    steps: true,
+               },
+            },
+        },
+    })
 }
 
 export async function claimRecipe(userid, recipeid) {
@@ -47,8 +86,9 @@ export async function createUser(user)
 export async function deleteAll() {
     await db.ingredient.deleteMany({});
     await db.step.deleteMany({});
+    await db.section.deleteMany({})
     await db.recipe.deleteMany({});
-    await db.siteUser.deleteMany({});
+    // await db.siteUser.deleteMany({});
 }
 
 export async function deleteUsers() {
@@ -56,27 +96,31 @@ export async function deleteUsers() {
 }
 
 export async function deleteRecipe(id) {
-    const delId = await db.recipe.select({
+    const recipeobject = await getRecipe(id);
+    for (const section in recipeobject.sections)
+    {
+        await db.ingredient.deleteMany({
+            where: {
+                sectionId: section.id,
+            },
+        })
+        await db.step.deleteMany({
+            where: {
+                sectionId: section.id,
+            },
+        })
+    }
+
+    await db.section.deleteMany({
         where: {
-            id: id,
+            recipeId: parseInt(id),
         },
     })
+
 
     await db.recipe.delete({
         where: {
-            id: delId,
-        },
-    })
-
-    await db.ingredient.deleteMany({
-        where: {
-            recipeId: delId,
-        },
-    })
-
-    await db.step.deleteMany({
-        where: {
-            recipeId: delId,
+            id: parseInt(id),
         },
     })
 }
@@ -118,14 +162,22 @@ export async function getUserRecipes(arg) {
 
 export async function updateRecipe(arg) {
     const recipeobject = JSON.parse(arg);
-    for (const ingredient of recipeobject.ingredients) {
-        delete ingredient.id;
-        delete ingredient.recipeId;
-    }
-    for (const step of recipeobject.steps) {
-        delete step.id;
-        delete step.recipeId;
-    }
+    // console.log(recipeobject);
+
+    // for (const section of recipeobject.sections)
+    // {
+    //     for (const ingredient of section.ingredients) {
+    //         delete ingredient.id;
+    //         delete ingredient.sectionId;
+    //     }
+    //     for (const step of section.steps) {
+    //         delete step.id;
+    //         delete step.sectionId;
+    //     }
+    // }
+
+    let sectionlist = [];
+
     await db.recipe.update({ 
         where: {
             id: recipeobject.id,
@@ -134,18 +186,78 @@ export async function updateRecipe(arg) {
             name: recipeobject.name.toLowerCase(),
             user: recipeobject.user.toLowerCase(),
             notes: recipeobject.notes.toLowerCase(),
-            ingredients: {
-                deleteMany:{},
-                create: 
-                    recipeobject.ingredients,
-            },
-            steps: {
-                deleteMany:{},
-                create: 
-                    recipeobject.steps,
-            },
             userId: Number(recipeobject.userid),
-        }})
+        },
+        include: {
+            sections: true,
+        },
+    })
+
+    for (const section of recipeobject.sections)
+    {   
+        await db.ingredient.deleteMany({
+            where: {
+                sectionId: section.id,
+            },
+        })
+
+        await db.step.deleteMany({
+            where: {
+                sectionId: section.id,
+            },
+        })
+
+        for (const i of section.ingredients)
+        {
+            delete i.id;
+            delete i.sectionId;
+        }
+
+        for (const s of section.steps)
+        {
+            delete s.id;
+            delete s.sectionId;
+        }
+
+        console.log(section.ingredients)
+        console.log(section.steps)
+
+        var sobject = await db.section.update({
+            where: {
+                id: section.id,
+            },
+            data: {
+                number: section.number,
+                title: section.title.toLowerCase(),
+                ingredients: {create: section.ingredients},
+                steps: {create: section.steps},
+                // recipeId: recipeobject.id,
+            },
+            include: {
+                ingredients: true,
+                steps: true,
+            },
+        })
+
+        sectionlist.push({id: sobject.id});
+    }
+
+    await db.recipe.update({
+        where: {id: recipeobject.id},
+        data: {
+            sections: {
+                connect: sectionlist,
+            },
+        },
+        include: {
+            sections: {
+               include: {
+                    ingredients: true,
+                    steps: true,
+               },
+            },
+        },
+    })
 }
 
 export async function searchName(arg) {
@@ -180,8 +292,17 @@ export async function searchIngredient(arg) {
     })
 
     for (const i of ingredients) {
-        const r = await getRecipe(i.recipeId);
-        recipes.push(r);
+        const sections = await db.section.findMany({
+            where: {
+                id: i.sectionId,
+            },
+        })
+
+        for (const s of sections)
+        {
+            const r = await getRecipe(s.recipeId);
+            recipes.push(r);
+        }
     }
     return recipes;
 }
@@ -202,8 +323,12 @@ export async function getRecipe(id) {
             id: Number(id),
         },
         include: {
-            ingredients: true,
-            steps: true,
+            sections: {
+               include: {
+                    ingredients: true,
+                    steps: true,
+               },
+            },
         },
     })
     return recipe;

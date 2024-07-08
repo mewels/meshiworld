@@ -2,8 +2,7 @@
     export let name = '';
     export let user = '';
     export let notes = '';
-    export let ilist = [];
-    export let slist = [];
+    export let seclist = [];
     export let userid;
 </script>
 
@@ -25,25 +24,31 @@
         </div>
     {/if}
 
+    <h3>sections</h3>
+    {#each seclist as section}
+        <!-- {console.log(seclist)} -->
+        <h3>ingredients</h3>
+        <ul class = 'ingredients'>
+            {#each section.ingredients as ingredient}
+                <li>
+                    {ingredient.name} : {ingredient.amount}
+                </li>
+            {/each}
+        </ul>
 
-    <h3>ingredients</h3>
-    <ul class = 'ingredients'>
-        {#each ilist as ingredient}
-            <li>
-                {ingredient.name} : {ingredient.amount}
-            </li>
-        {/each}
-    </ul>
+        <h3>steps</h3>
 
-    <h3>steps</h3>
+        <ol class = 'steps'>
+            {#each section.steps as step}
+                <li>
+                    {step.action}
+                </li>
+            {/each}
+        </ol>
+    {/each}
 
-    <ol class = 'steps'>
-        {#each slist as step}
-            <li>
-                {step.action}
-            </li>
-        {/each}
-    </ol>
+
+    
 </div>
 
 <style>

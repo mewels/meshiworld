@@ -39,6 +39,8 @@
                 do it!
             </button>
         </form>
+
+        <form method='POST' action="?/delete"><button>deleteall</button></form>
     {/if}
 
 

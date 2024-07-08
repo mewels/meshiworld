@@ -16,29 +16,38 @@ model siteUser {
 }
 
 model Ingredient {
-  id       Int     @id @default(autoincrement())
-  name     String
-  amount   String
-  recipeId Int?
-  Recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  id        Int      @id @default(autoincrement())
+  name      String
+  amount    String
+  sectionId Int?
+  Section   Section? @relation(fields: [sectionId], references: [id])
 }
 
 model Step {
-  id       Int     @id @default(autoincrement())
-  number   Int
-  action   String
-  recipeId Int?
-  Recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  id        Int      @id @default(autoincrement())
+  number    Int
+  action    String
+  sectionId Int?
+  Section   Section? @relation(fields: [sectionId], references: [id])
 }
 
 model Recipe {
+  id        Int       @id @default(autoincrement())
+  name      String
+  user      String
+  notes     String
+  timestamp DateTime  @default(now())
+  sections  Section[]
+  userId    Int?
+  author    siteUser? @relation(fields: [userId], references: [id])
+}
+
+model Section {
   id          Int          @id @default(autoincrement())
-  name        String
-  user        String
-  notes       String
-  timestamp   DateTime     @default(now())
+  title       String
+  number      Int
   ingredients Ingredient[]
   steps       Step[]
-  userId      Int?
-  author      siteUser?    @relation(fields: [userId], references: [id])
+  recipeId    Int?
+  Recipe      Recipe?      @relation(fields: [recipeId], references: [id])
 }

@@ -2,44 +2,37 @@
     import {page} from '$app/stores'
     import InfoHead from "$lib/InfoHead.svelte";
     // import Img from '../lib/Img.svelte';
+    // import Nav from "../Nav.svelte";
 
-    // import nekoedit from './assets/nekoedit.png' 
     export let data;
 
-    let id = data.recipe.id
-    let ingredientlist = data.recipe.ingredients;
-    let steplist = data.recipe.steps;
+    // import nekoedit from './assets/nekoedit.png' 
+    // let ingredientlist = [{name: '', amount: ''}];
+    // let steplist = [{number: 1, action: ''}];
+    let sectionlist = data.recipe.sections
     let name = data.recipe.name;
     let user = data.recipe.user;
     let notes = data.recipe.notes;
     let userid = data.recipe.userid;
+    let id = data.recipe.id;
+    let sectionindex = 0;
 
 
     const addIngredient = () =>{
-        ingredientlist = [...ingredientlist, {name: '', amount: ''}]
+        sectionlist[sectionindex].ingredients = [...sectionlist[sectionindex].ingredients, {name: '', amount: ''}]
     };
 
     const removeIngredient = () => {
-        ingredientlist = ingredientlist.slice(0, ingredientlist.length-1)
+        sectionlist[sectionindex].ingredients = sectionlist[sectionindex].ingredients.slice(0, sectionlist[sectionindex].ingredients.length-1)
     };
 
     const addStep = () => {
-        steplist = [...steplist, {number: steplist.length+1, action: ''}]
+        sectionlist[sectionindex].steps = [...sectionlist[sectionindex].steps, {number: sectionlist[sectionindex].steps.length+1, action: ''}]
     };
 
     const removeStep = () => {
-        steplist = steplist.slice(0, steplist.length-1)
+        sectionlist[sectionindex].steps = sectionlist[sectionindex].steps.slice(0, sectionlist[sectionindex].steps.length-1)
     };
-
-    const updatelists = () => {
-        for (let i = 0; i < ingredientlist.length; i++) {
-            console.log(ingredientlist[i])
-        }
-
-        for (let j = 0; j < steplist.length; j++){
-            console.log(steplist[j])
-        }
-    }
 
     $: if (data.sessionuser) {
         user = data.sessionuser.username
@@ -51,10 +44,15 @@
         name: name,
         user: user,
         notes: notes,
-        ingredients: ingredientlist,
-        steps: steplist,
+        sections: sectionlist,
         userid: userid
     };
+    
+    // const updatelists = () => {
+    //     console.log('-----------')
+    //     console.log(compiledrecipe)
+    //     console.log('-----------')
+    // }
 
 </script>
 
@@ -71,7 +69,7 @@
         </div>
 
         {#if data.sessionuser}
-            <div class = "usertag" style="text-align:center;">submitting from 
+            <div class = "usertag" style="text-align:center;">submitting as 
                 <a href = "https://meshi.world/user/{user}">{user}
                 </a>
             </div>
@@ -87,38 +85,45 @@
             <textarea bind:value = {notes} name = "notes" id = "notes" placeholder="notes (optional)" size = 30/>
         </div>
 
-        <h3>ingredients</h3>
-        {#each ingredientlist as a, i}
-            <div class = "element ingredient">
-                    <input type = "text" id = {i} placeholder="name of ingedient" name="name" bind:value = {ingredientlist[i].name} required minlength = 1 size = 20
-                    />
-                    <input type = "text" id = {i} placeholder = "amount of ingredient" name="amount" bind:value = {ingredientlist[i].amount} required minlength = 1 size = 20
-                    />
-            </div>
+        <h3>sections </h3>
+        {#each sectionlist as x}
+        <div class = "section">
+                <h3>ingredients</h3>
+                {#each sectionlist[sectionindex].ingredients as a, i}
+                    <div class = "element ingredient">
+                            <input type = "text" id = {i} placeholder="name of ingedient" name="name" bind:value = {sectionlist[sectionindex].ingredients[i].name} required minlength = 1 size = 20
+                            />
+                            <input type = "text" id = {i} placeholder = "amount of ingredient" name="amount" bind:value = {sectionlist[sectionindex].ingredients[i].amount} required minlength = 1 size = 20
+                            />
+                    </div>
+                {/each}
+
+                <div class = "element">
+                    <button on:click|preventDefault = {addIngredient}>Add</button>
+                    <button on:click = {removeIngredient}>Remove</button>
+                </div>
+
+                <h3>steps</h3>
+                {#each sectionlist[sectionindex].steps as s, i}
+                <div class = "element">
+                    <label>
+                        [{sectionlist[sectionindex].steps[i].number}]:
+                        <textarea id = {i} name="action" bind:value = {sectionlist[sectionindex].steps[i].action} required minlength = 1 size = 20/>
+                    </label>
+                </div>
+                {/each}
+
+                <div class = "element">
+                    <button on:click|preventDefault = {addStep}>Add</button>
+                    <button on:click = {removeStep}>Remove</button>
+                </div>
+
+        </div>
         {/each}
 
-        <div class = "element">
-            <button on:click|preventDefault = {addIngredient}>Add</button>
-            <button on:click = {removeIngredient}>Remove</button>
-        </div>
-
-        <h3>steps</h3>
-        {#each steplist as s, i}
-        <div class = "element">
-            <label>
-                [{steplist[i].number}]:
-                <textarea id = {i} name="action" bind:value = {steplist[i].action} required minlength = 1 size = 20/>
-            </label>
-        </div>
-        {/each}
-
-        <div class = "element">
-            <button on:click|preventDefault = {addStep}>Add</button>
-            <button on:click = {removeStep}>Remove</button>
-        </div>
         
         <input type = "hidden" name = "compiledrecipe" id = "compiledrecipe" value = {JSON.stringify(compiledrecipe)}>
-        <button on:click ={updatelists}>
+        <button>
             update recipe
         </button>
     </form>
@@ -150,14 +155,14 @@
         font-size: 16px;
     }
 
-    p.notes {
+    /* p.notes {
         display: flex;
         flex-wrap: wrap;
         font-size: 15px;
         text-align: center;
         max-width: 20rem;
         margin:auto;
-    }
+    } */
 
     h3 {
         margin-bottom: 0;

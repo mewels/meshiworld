@@ -7,27 +7,28 @@
     // import nekoedit from './assets/nekoedit.png' 
     let ingredientlist = [{name: '', amount: ''}];
     let steplist = [{number: 1, action: ''}];
+    let sectionlist = [{number: 1, title: '', ingredients: ingredientlist, steps: steplist}];
     let name = '';
     let user = '';
     let notes = '';
     let userid = null;
+    let sectionindex = 0;
     export let data;
 
-
     const addIngredient = () =>{
-        ingredientlist = [...ingredientlist, {name: '', amount: ''}]
+        sectionlist[sectionindex].ingredients = [...sectionlist[sectionindex].ingredients, {name: '', amount: ''}]
     };
 
     const removeIngredient = () => {
-        ingredientlist = ingredientlist.slice(0, ingredientlist.length-1)
+        sectionlist[sectionindex].ingredients = sectionlist[sectionindex].ingredients.slice(0, sectionlist[sectionindex].ingredients.length-1)
     };
 
     const addStep = () => {
-        steplist = [...steplist, {number: steplist.length+1, action: ''}]
+        sectionlist[sectionindex].steps = [...sectionlist[sectionindex].steps, {number: sectionlist[sectionindex].steps.length+1, action: ''}]
     };
 
     const removeStep = () => {
-        steplist = steplist.slice(0, steplist.length-1)
+        sectionlist[sectionindex].steps = sectionlist[sectionindex].steps.slice(0, sectionlist[sectionindex].steps.length-1)
     };
 
     $: if (data.sessionuser) {
@@ -39,8 +40,7 @@
         name: name,
         user: user,
         notes: notes,
-        ingredients: ingredientlist,
-        steps: steplist,
+        sections: sectionlist,
         userid: userid
     };
 
@@ -75,35 +75,43 @@
             <textarea bind:value = {notes} name = "notes" id = "notes" placeholder="notes (optional)" size = 30/>
         </div>
 
-        <h3>ingredients</h3>
-        {#each ingredientlist as a, i}
-            <div class = "element ingredient">
-                    <input type = "text" id = {i} placeholder="name of ingedient" name="name" bind:value = {ingredientlist[i].name} required minlength = 1 size = 20
-                    />
-                    <input type = "text" id = {i} placeholder = "amount of ingredient" name="amount" bind:value = {ingredientlist[i].amount} required minlength = 1 size = 20
-                    />
-            </div>
+        <h3>sections </h3>
+        {#each sectionlist as x}
+        <div class = "section">
+                <h3>ingredients</h3>
+                {#each sectionlist[sectionindex].ingredients as a, i}
+                    <div class = "element ingredient">
+                            <input type = "text" id = {i} placeholder="name of ingedient" name="name" bind:value = {sectionlist[sectionindex].ingredients[i].name} required minlength = 1 size = 20
+                            />
+                            <input type = "text" id = {i} placeholder = "amount of ingredient" name="amount" bind:value = {sectionlist[sectionindex].ingredients[i].amount} required minlength = 1 size = 20
+                            />
+                    </div>
+                {/each}
+
+                <div class = "element">
+                    <button on:click|preventDefault = {addIngredient}>Add</button>
+                    <button on:click = {removeIngredient}>Remove</button>
+                </div>
+
+                <h3>steps</h3>
+                {#each sectionlist[sectionindex].steps as s, i}
+                <div class = "element">
+                    <label>
+                        [{sectionlist[sectionindex].steps[i].number}]:
+                        <textarea id = {i} name="action" bind:value = {sectionlist[sectionindex].steps[i].action} required minlength = 1 size = 20/>
+                    </label>
+                </div>
+                {/each}
+
+                <div class = "element">
+                    <button on:click|preventDefault = {addStep}>Add</button>
+                    <button on:click = {removeStep}>Remove</button>
+                </div>
+
+        </div>
         {/each}
 
-        <div class = "element">
-            <button on:click|preventDefault = {addIngredient}>Add</button>
-            <button on:click = {removeIngredient}>Remove</button>
-        </div>
-
-        <h3>steps</h3>
-        {#each steplist as s, i}
-        <div class = "element">
-            <label>
-                [{steplist[i].number}]:
-                <textarea id = {i} name="action" bind:value = {steplist[i].action} required minlength = 1 size = 20/>
-            </label>
-        </div>
-        {/each}
-
-        <div class = "element">
-            <button on:click|preventDefault = {addStep}>Add</button>
-            <button on:click = {removeStep}>Remove</button>
-        </div>
+        
 
         {#if !data.sessionuser}
         <p class = "notes">
@@ -127,6 +135,14 @@
         display: flex;
         flex-wrap:wrap;
         justify-content: center;
+    }
+
+    div.section {
+        margin-top: .5em;
+        margin-bottom: .5em;
+        border-style: solid;
+        border-width: 1px;
+        border-color: black;
     }
 
     div.ingredient > input {
