@@ -115,33 +115,47 @@
             <textarea bind:value = {notes} name = "notes" id = "notes" placeholder="notes (optional)" size = 30/>
         </div>
 
-
-        <h3>sections </h3>
         <div class = "tab">
             {#each sectionlist as x,j}
-            <button class = "tablink" type="button" on:click={()=>selectSection(j)}>{sectionlist[j].number}</button>
+            {#if status[j] === "inline"}
+                <button class = "tablink" style="background-color:var(--section-color);" type="button" on:click={()=>selectSection(j)}>
+                    {#if sectionlist[j].title !== ''}
+                        {sectionlist[j].title}
+                    {:else}
+                        {sectionlist[j].number}
+                    {/if}
+                </button>
+            {:else}
+                <button class = "tablink" type="button" on:click={()=>selectSection(j)}>
+                    {#if sectionlist[j].title !== ''}
+                        {sectionlist[j].title}
+                    {:else}
+                        {sectionlist[j].number}
+                    {/if}
+                </button>
+            {/if}
             {/each}
-            <button class = "tablink" type="button" on:click|preventDefault={addSection}>Add Section</button>
+            <button class = "tablink" type="button" on:click|preventDefault={addSection}>+</button>
 
         </div>
         {#each sectionlist as x,j}
         {#if status[j] === "inline"}
         <div class = "sectioncontent">
-            <div>this is section {j+1}</div>
-
-            <div class = "element">
-                <label>
-                    <input type = "text" placeholder = "section title" id = "user" name="user" bind:value = {sectionlist[j].title} minlength = 1 size = 10/>
-                </label>
-                {#if sectionlist.length !== 1}
-                    <button class = "remove" type= "button" on:click={()=>removeSection(j)}>Remove Section</button>
-                {/if}
-            </div>
+            {#if sectionlist.length > 1}
+                <div class = "titleelement">
+                    <label>
+                        <input type = "text" placeholder = "section title" id = "user" name="user" bind:value = {sectionlist[j].title} required minlength = 1 size = 10/>
+                    </label>
+                    {#if sectionlist.length !== 1}
+                    <button class = "remove" type= "button" on:click={()=>removeSection(j)}>x</button>
+                    {/if}
+                </div>
+            {/if}
 
                 <h3>ingredients</h3>
                 {#each sectionlist[j].ingredients as a, i}
                     <div class = "element ingredient">
-                            <input type = "text" id = {i} placeholder="name of ingedient" name="name" bind:value = {sectionlist[j].ingredients[i].name} required minlength = 1 size = 20
+                            <input type = "text" id = {i} placeholder="name of ingredient" name="name" bind:value = {sectionlist[j].ingredients[i].name} required minlength = 1 size = 20
                             />
                             <input type = "text" id = {i} placeholder = "amount of ingredient" name="amount" bind:value = {sectionlist[j].ingredients[i].amount} required minlength = 1 size = 20
                             />
@@ -149,28 +163,34 @@
                 {/each}
 
                 <div class = "element">
-                    <button type= "button" on:click|preventDefault = {() => addIngredient(j)}>Add</button>
-                    <button type= "button" on:click = {() => removeIngredient(j)}>Remove</button>
+                    <button type= "button" on:click|preventDefault = {() => addIngredient(j)}>+</button>
+                    <button type= "button" on:click = {() => removeIngredient(j)}>-</button>
                 </div>
 
-                <h3>steps</h3>
-                {#each sectionlist[j].steps as s, i}
-                <div class = "element">
-                    <label>
-                        [{sectionlist[j].steps[i].number}]:
-                        <textarea id = {i} name="action" bind:value = {sectionlist[j].steps[i].action} minlength = 1 size = 20/>
-                    </label>
-                </div>
-                {/each}
+                {#if sectionlist.length > 1}
+                    <h3>steps for this section (optional)</h3>
+                    {#each sectionlist[j].steps as s, i}
+                    <div class = "element">
+                        <label>
+                            [{sectionlist[j].steps[i].number}]:
+                            <textarea id = {i} name="action" bind:value = {sectionlist[j].steps[i].action} minlength = 1 size = 20/>
+                        </label>
+                    </div>
+                    {/each}
 
-                <div class = "element">
-                    <button type= "button" on:click|preventDefault = {() => addStep(j)}>Add</button>
-                    <button type= "button" on:click = {() => removeStep(j)}>Remove</button>
-                </div>
+                    <div class = "element">
+                        <button type= "button" on:click|preventDefault = {() => addStep(j)}>+</button>
+                        {#if sectionlist[j].steps.length !== 0}
+                        <button type= "button" on:click = {() => removeStep(j)}>-</button>
+                        {/if}
+                    </div>
+                {/if}
 
         </div>
         {/if}
         {/each}
+
+        <h3>instructions</h3>
 
         {#each recsteplist as r, i}
         <div class = "element">
@@ -182,8 +202,10 @@
         {/each}
 
         <div class = "element">
-            <button type= "button" on:click|preventDefault = {addRecStep}>Add</button>
-            <button type= "button" on:click = {removeRecStep}>Remove</button>
+            <button type= "button" on:click|preventDefault = {addRecStep}>+</button>
+            {#if recsteplist.length >1}
+            <button type= "button" on:click = {removeRecStep}>-</button>
+            {/if}
         </div>
 
         {#if !data.sessionuser}
@@ -211,12 +233,25 @@
         justify-content: center;
     }
 
-    div.sectioncontent {
+    div.titleelement {
         margin-top: .5em;
         margin-bottom: .5em;
-        border-style: solid;
+        line-height: 1;
+        display: flex;
+        flex-wrap:wrap;
+        justify-content: center;
+    }
+
+
+    div.sectioncontent {
+        margin-bottom: .5em;
+        padding-top: .5em;
+        padding-bottom: .5em;
+        border-style: hidden;
         border-width: 1px;
         border-color: black;
+        background-color: var(--section-color);
+
     }
 
     div.ingredient > input {
@@ -226,8 +261,25 @@
         margin-bottom: .5em;
     }
 
+    div.tab {
+        margin-bottom: 0em;
+    }
+
+    button.tablink {
+        background-color: var(--background-color);
+        padding: .6rem;
+        border-style: hidden;
+        border-width:1px;
+        border-color:black;
+        margin-bottom: 0em;
+    }
+
     button.remove {
-        position: right;
+        background-color: rgba(255, 30, 0, 0.253);
+        padding-left: .5rem;
+        padding-right: .5rem;
+        padding-top: .2rem;
+        padding-bottom: .2rem;
     }
 
     div.submit {
@@ -249,5 +301,6 @@
 
     h3 {
         margin-bottom: 0;
+        margin-top: 0;
     }
 </style>

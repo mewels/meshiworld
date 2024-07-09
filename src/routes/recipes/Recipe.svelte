@@ -5,6 +5,13 @@
     export let seclist = [];
     export let recsteplist = [];
     export let userid;
+    
+    let status = ["inline"];
+
+    function selectSection(j) {
+        status.fill("none");
+        status[j] = "inline";
+    }
 </script>
 
 <div class = 'recipe'>
@@ -25,9 +32,29 @@
         </div>
     {/if}
 
-    {#each seclist as section}
-        <!-- {console.log(seclist)} -->
-        <h2>{section.title}</h2>
+    <div class = "tab">
+        {#each seclist as x,j}
+        {#if status[j] === "inline"}
+            <button class = "tablink" style="background-color:var(--section-color);" type="button" on:click={()=>selectSection(j)}>
+                {#if seclist[j].title !== ''}
+                    {seclist[j].title}
+                {:else}
+                    {seclist[j].number}
+                {/if}
+            </button>
+        {:else}
+            <button class = "tablink" type="button" on:click={()=>selectSection(j)}>
+                {#if seclist[j].title !== ''}
+                    {seclist[j].title}
+                {:else}
+                    {seclist[j].number}
+                {/if}
+            </button>
+        {/if}
+        {/each}
+    </div>
+    {#each seclist as section, j}
+    {#if status[j] === "inline"}
         <div class = "sectioncontent">
             <h3>ingredients</h3>
             <ul class = 'ingredients'>
@@ -48,6 +75,7 @@
                 {/each}
             </ol>
         </div>
+        {/if}
     {/each}
 
     <h3>Instructions</h3>
@@ -83,14 +111,32 @@
     h2 {
         margin-bottom: 0;
     }
-
-    div.sectioncontent {
-        margin-top: .5em;
-        margin-bottom: .5em;
-        border-style: dotted;
-        border-width: 1px;
-        border-radius: 30px;
-        border-color: black;
-        background-color: rgba(255, 255, 255, 0.26)   
+    h3 {
+        margin-top:0;
+        margin-bottom:0;
     }
+    div.sectioncontent {
+        margin-bottom: .5em;
+        padding-top: .5em;
+        padding-bottom: .5em;
+        border-style: hidden;
+        border-width: 1px;
+        border-color: black;
+        background-color: var(--section-color);
+
+    }
+
+    div.tab {
+        margin-bottom: 0em;
+    }
+
+    button.tablink {
+        background-color: var(--background-color);
+        padding: .6rem;
+        border-style: hidden;
+        border-width:1px;
+        border-color:black;
+        margin-bottom: 0em;
+    }
+
 </style>
