@@ -3,6 +3,7 @@
     export let user = '';
     export let notes = '';
     export let seclist = [];
+    export let recsteplist = [];
     export let userid;
 </script>
 
@@ -48,6 +49,16 @@
             </ol>
         </div>
     {/each}
+
+    <h3>Instructions</h3>
+    <ol class = 'steps'>
+        {#each recsteplist as recstep}
+            <li>
+                {recstep.action}
+            </li>
+        {/each}
+    </ol>
+
 
 
     

@@ -15,11 +15,12 @@
     let notes = data.recipe.notes;
     let userid = data.recipe.userid;
     let id = data.recipe.id;
+    let recsteplist = data.recipe.recsteps;
     let status = ["inline"];
 
 
     const addSection = () => {
-        sectionlist.push({number: parseInt(sectionlist.length+1), title: '', ingredients: [{name: '', amount: ''}], steps: [{number: 1, action: ''}]});
+        sectionlist.push({number: parseInt(sectionlist.length+1), title: '', ingredients: [{name: '', amount: ''}], steps: []});
         sectionlist=sectionlist
         selectSection(sectionlist.length-1)
     }
@@ -56,6 +57,14 @@
     function removeStep(j){
         sectionlist[j].steps = sectionlist[j].steps.slice(0, sectionlist[j].steps.length-1)
     };
+    
+    const addRecStep=()=>{
+        recsteplist = [...recsteplist, {number: recsteplist.length+1, action: ''}] 
+    };
+
+    const removeRecStep=()=>{
+        recsteplist = recsteplist.slice(0, recsteplist.length-1)
+    }
 
     function selectSection(j) {
         status.fill("none");
@@ -73,6 +82,7 @@
         user: user,
         notes: notes,
         sections: sectionlist,
+        recsteps: recsteplist,
         userid: userid
     };
 </script>
@@ -158,6 +168,20 @@
             </div>
             {/if}
         {/each}
+
+        {#each recsteplist as r, i}
+        <div class = "element">
+            <label>
+                [{recsteplist[i].number}]:
+                <textarea id = {i} name="action" bind:value = {recsteplist[i].action} required minlength = 1 size = 20/>
+            </label>
+        </div>
+        {/each}
+
+        <div class = "element">
+            <button type= "button" on:click|preventDefault = {addRecStep}>Add</button>
+            <button type= "button" on:click = {removeRecStep}>Remove</button>
+        </div>
 
         
         <input type = "hidden" name = "compiledrecipe" id = "compiledrecipe" value = {JSON.stringify(compiledrecipe)}>

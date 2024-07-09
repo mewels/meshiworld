@@ -9,6 +9,8 @@ String.prototype.toTitleCase = function () {
 export async function addRecipe(recipe) {
     const recipeobject = JSON.parse(recipe);
 
+    console.log(recipeobject)
+
     let sectionlist = [];
 
     var temp = await db.recipe.create({ 
@@ -16,6 +18,7 @@ export async function addRecipe(recipe) {
             name: recipeobject.name.toLowerCase(),
             user: recipeobject.user.toLowerCase(),
             notes: recipeobject.notes.toLowerCase(),
+            recsteps: {create: recipeobject.recsteps},
             userId: recipeobject.userid,
         },
         include: {
@@ -55,6 +58,7 @@ export async function addRecipe(recipe) {
                     steps: true,
                },
             },
+            recsteps: true,
         },
     })
 }
@@ -86,7 +90,8 @@ export async function createUser(user)
 export async function deleteAll() {
     await db.ingredient.deleteMany({});
     await db.step.deleteMany({});
-    await db.section.deleteMany({})
+    await db.section.deleteMany({});
+    await db.recStep.deleteMany({});
     await db.recipe.deleteMany({});
     // await db.siteUser.deleteMany({});
 }
@@ -97,21 +102,30 @@ export async function deleteUsers() {
 
 export async function deleteRecipe(id) {
     const recipeobject = await getRecipe(id);
+
     for (const section in recipeobject.sections)
     {
-        await db.ingredient.deleteMany({
-            where: {
-                sectionId: section.id,
-            },
-        })
-        await db.step.deleteMany({
-            where: {
-                sectionId: section.id,
-            },
-        })
+        if (section.id !== undefined) {
+            await db.ingredient.deleteMany({
+                where: {
+                    sectionId: section.id,
+                },
+            })
+            await db.step.deleteMany({
+                where: {
+                    sectionId: section.id,
+                },
+            })
+        }
     }
 
     await db.section.deleteMany({
+        where: {
+            recipeId: parseInt(id),
+        },
+    })
+
+    await db.recStep.deleteMany({
         where: {
             recipeId: parseInt(id),
         },
@@ -164,24 +178,32 @@ export async function updateRecipe(arg) {
     const recipeobject = JSON.parse(arg);
     for (const section of recipeobject.sections)
         {   
-            await db.ingredient.deleteMany({
-                where: {
-                    sectionId: section.id,
-                },
-            })
+            if (section.id !== undefined) {
+
+                await db.ingredient.deleteMany({
+                    where: {
+                        sectionId: section.id,
+                    },
+                })
+            
+                await db.step.deleteMany({
+                    where: {
+                        sectionId: section.id,
+                    },
+                })
         
-            await db.step.deleteMany({
-                where: {
-                    sectionId: section.id,
-                },
-            })
-    
-            await db.section.deleteMany({
-                where: {
-                    recipeId: recipeobject.id,
-                },
-            })
+                await db.section.deleteMany({
+                    where: {
+                        recipeId: recipeobject.id,
+                    },
+                })
+            }
         }
+    for (const recstep of recipeobject.recsteps)
+    {
+        delete recstep.id;
+        delete recstep.recipeId;
+    }
 
     let sectionlist = [];
 
@@ -193,6 +215,10 @@ export async function updateRecipe(arg) {
             name: recipeobject.name.toLowerCase(),
             user: recipeobject.user.toLowerCase(),
             notes: recipeobject.notes.toLowerCase(),
+            recsteps: {
+                deleteMany:{},
+                create: recipeobject.recsteps,
+            },
             userId: Number(recipeobject.userid),
         },
         include: {
@@ -319,6 +345,7 @@ export async function getRecipe(id) {
                     steps: true,
                },
             },
+            recsteps: true,
         },
     })
     return recipe;

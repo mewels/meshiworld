@@ -6,8 +6,9 @@
 
     // import nekoedit from './assets/nekoedit.png' 
     let ingredientlist = [{name: '', amount: ''}];
-    let steplist = [{number: 1, action: ''}];
+    let steplist = [];
     let sectionlist = [{number: 1, title: '', ingredients: ingredientlist, steps: steplist}];
+    let recsteplist = [{number: 1, action: ''}];
     let name = '';
     let user = '';
     let notes = '';
@@ -18,7 +19,7 @@
 
 
     const addSection = () => {
-        sectionlist.push({number: parseInt(sectionlist.length+1), title: '', ingredients: [{name: '', amount: ''}], steps: [{number: 1, action: ''}]});
+        sectionlist.push({number: parseInt(sectionlist.length+1), title: '', ingredients: [{name: '', amount: ''}], steps: []});
         sectionlist=sectionlist
         selectSection(sectionlist.length-1)
     }
@@ -56,6 +57,14 @@
         sectionlist[j].steps = sectionlist[j].steps.slice(0, sectionlist[j].steps.length-1)
     };
 
+    const addRecStep=()=>{
+        recsteplist = [...recsteplist, {number: recsteplist.length+1, action: ''}] 
+    };
+
+    const removeRecStep=()=>{
+        recsteplist = recsteplist.slice(0, recsteplist.length-1)
+    }
+
     function selectSection(j) {
         status.fill("none");
         status[j] = "inline";
@@ -71,7 +80,8 @@
         user: user,
         notes: notes,
         sections: sectionlist,
-        userid: userid
+        recsteps: recsteplist,
+        userid: userid,
     };
 
 </script>
@@ -148,7 +158,7 @@
                 <div class = "element">
                     <label>
                         [{sectionlist[j].steps[i].number}]:
-                        <textarea id = {i} name="action" bind:value = {sectionlist[j].steps[i].action} required minlength = 1 size = 20/>
+                        <textarea id = {i} name="action" bind:value = {sectionlist[j].steps[i].action} minlength = 1 size = 20/>
                     </label>
                 </div>
                 {/each}
@@ -161,6 +171,20 @@
         </div>
         {/if}
         {/each}
+
+        {#each recsteplist as r, i}
+        <div class = "element">
+            <label>
+                [{recsteplist[i].number}]:
+                <textarea id = {i} name="action" bind:value = {recsteplist[i].action} required minlength = 1 size = 20/>
+            </label>
+        </div>
+        {/each}
+
+        <div class = "element">
+            <button type= "button" on:click|preventDefault = {addRecStep}>Add</button>
+            <button type= "button" on:click = {removeRecStep}>Remove</button>
+        </div>
 
         {#if !data.sessionuser}
         <p class = "notes">

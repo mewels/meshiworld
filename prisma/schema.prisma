@@ -31,6 +31,14 @@ model Step {
   Section   Section? @relation(fields: [sectionId], references: [id])
 }
 
+model RecStep {
+  id       Int     @id @default(autoincrement())
+  number   Int
+  action   String
+  recipeId Int?
+  Recipe   Recipe? @relation(fields: [recipeId], references: [id])
+}
+
 model Recipe {
   id        Int       @id @default(autoincrement())
   name      String
@@ -38,6 +46,7 @@ model Recipe {
   notes     String
   timestamp DateTime  @default(now())
   sections  Section[]
+  recsteps  RecStep[]
   userId    Int?
   author    siteUser? @relation(fields: [userId], references: [id])
 }
