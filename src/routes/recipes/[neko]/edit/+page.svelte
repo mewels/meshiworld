@@ -15,24 +15,52 @@
     let notes = data.recipe.notes;
     let userid = data.recipe.userid;
     let id = data.recipe.id;
-    let sectionindex = 0;
+    let status = ["inline"];
 
 
-    const addIngredient = () =>{
-        sectionlist[sectionindex].ingredients = [...sectionlist[sectionindex].ingredients, {name: '', amount: ''}]
+    const addSection = () => {
+        sectionlist.push({number: parseInt(sectionlist.length+1), title: '', ingredients: [{name: '', amount: ''}], steps: [{number: 1, action: ''}]});
+        sectionlist=sectionlist
+        selectSection(sectionlist.length-1)
+    }
+
+    function removeSection(j){
+        if (sectionlist.length !== 1) {
+            // sectionlist = sectionlist.slice(0, sectionlist.length-1);
+            sectionlist.splice(j,1)
+            status.splice(j,1)
+            sectionlist=sectionlist
+            status=status
+            let index = 1
+            for (const s of sectionlist){
+                
+                s.number = index;
+                index++;
+            }
+            selectSection(sectionlist.length-1)
+        }
+    }
+
+    function addIngredient(j) {
+        sectionlist[j].ingredients = [...sectionlist[j].ingredients, {name: '', amount: ''}]
     };
 
-    const removeIngredient = () => {
-        sectionlist[sectionindex].ingredients = sectionlist[sectionindex].ingredients.slice(0, sectionlist[sectionindex].ingredients.length-1)
+    function removeIngredient(j){
+        sectionlist[j].ingredients = sectionlist[j].ingredients.slice(0, sectionlist[j].ingredients.length-1)
     };
 
-    const addStep = () => {
-        sectionlist[sectionindex].steps = [...sectionlist[sectionindex].steps, {number: sectionlist[sectionindex].steps.length+1, action: ''}]
+    function addStep(j){
+        sectionlist[j].steps = [...sectionlist[j].steps, {number: sectionlist[j].steps.length+1, action: ''}]
     };
 
-    const removeStep = () => {
-        sectionlist[sectionindex].steps = sectionlist[sectionindex].steps.slice(0, sectionlist[sectionindex].steps.length-1)
+    function removeStep(j){
+        sectionlist[j].steps = sectionlist[j].steps.slice(0, sectionlist[j].steps.length-1)
     };
+
+    function selectSection(j) {
+        status.fill("none");
+        status[j] = "inline";
+    }
 
     $: if (data.sessionuser) {
         user = data.sessionuser.username
@@ -47,13 +75,6 @@
         sections: sectionlist,
         userid: userid
     };
-    
-    // const updatelists = () => {
-    //     console.log('-----------')
-    //     console.log(compiledrecipe)
-    //     console.log('-----------')
-    // }
-
 </script>
 
 <InfoHead pagedescription="> ______ /<" pagetitle ="hell world" pageurl = {$page.url}/>
@@ -86,39 +107,56 @@
         </div>
 
         <h3>sections </h3>
-        {#each sectionlist as x}
-        <div class = "section">
+        <div class = "tab">
+            {#each sectionlist as x,j}
+            <button class = "tablink" type="button" on:click={()=>selectSection(j)}>{sectionlist[j].number}</button>
+            {/each}
+            <button class = "tablink" type="button" on:click|preventDefault={addSection}>Add Section</button>
+
+        </div>
+        {#each sectionlist as x, j}
+        {#if status[j] === "inline"}
+            <div class = "sectioncontent">
+                <div class = "element">
+                    <label>
+                        <input type = "text" placeholder = "section title" id = "user" name="user" bind:value = {sectionlist[j].title} minlength = 1 size = 10/>
+                    </label>
+                    {#if sectionlist.length !== 1}
+                        <button class = "remove" type= "button" on:click={() => removeSection(j)}>Remove Section</button>
+                    {/if}
+                </div>
                 <h3>ingredients</h3>
-                {#each sectionlist[sectionindex].ingredients as a, i}
+                {#each sectionlist[j].ingredients as a, i}
                     <div class = "element ingredient">
-                            <input type = "text" id = {i} placeholder="name of ingedient" name="name" bind:value = {sectionlist[sectionindex].ingredients[i].name} required minlength = 1 size = 20
+                            <input type = "text" id = {i} placeholder="name of ingedient" name="name" bind:value = {sectionlist[j].ingredients[i].name} required minlength = 1 size = 20
                             />
-                            <input type = "text" id = {i} placeholder = "amount of ingredient" name="amount" bind:value = {sectionlist[sectionindex].ingredients[i].amount} required minlength = 1 size = 20
+                            <input type = "text" id = {i} placeholder = "amount of ingredient" name="amount" bind:value = {sectionlist[j].ingredients[i].amount} required minlength = 1 size = 20
                             />
                     </div>
                 {/each}
 
                 <div class = "element">
-                    <button on:click|preventDefault = {addIngredient}>Add</button>
-                    <button on:click = {removeIngredient}>Remove</button>
+                    <button type= "button" on:click|preventDefault = {() => addIngredient(j)}>Add</button>
+                    <button type= "button" on:click = {() => removeIngredient(j)}>Remove</button>
                 </div>
 
                 <h3>steps</h3>
-                {#each sectionlist[sectionindex].steps as s, i}
+                {#each sectionlist[j].steps as s, i}
                 <div class = "element">
                     <label>
-                        [{sectionlist[sectionindex].steps[i].number}]:
-                        <textarea id = {i} name="action" bind:value = {sectionlist[sectionindex].steps[i].action} required minlength = 1 size = 20/>
+                        [{sectionlist[j].steps[i].number}]:
+                        <textarea id = {i} name="action" bind:value = {sectionlist[j].steps[i].action} required minlength = 1 size = 20/>
                     </label>
                 </div>
                 {/each}
 
                 <div class = "element">
-                    <button on:click|preventDefault = {addStep}>Add</button>
-                    <button on:click = {removeStep}>Remove</button>
+                    <button type= "button" on:click|preventDefault = {() => addStep(j)}>Add</button>
+                    <button type= "button" on:click = {() => removeStep(j)}>Remove</button>
                 </div>
 
-        </div>
+            </div>
+            {/if}
         {/each}
 
         
@@ -145,6 +183,14 @@
         margin: .5rem;
         margin-top: .5em;
         margin-bottom: .5em;
+    }
+
+    div.sectioncontent {
+        margin-top: .5em;
+        margin-bottom: .5em;
+        border-style: solid;
+        border-width: 1px;
+        border-color: black;
     }
 
     div.submit {

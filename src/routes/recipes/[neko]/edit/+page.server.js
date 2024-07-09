@@ -13,6 +13,7 @@ export const actions = {
     update: async({request,params}) => {
         const data = await request.formData();
         const recipe =  data.get("compiledrecipe");
+        // console.log(recipe);
         const getid = await getRecipe(params.neko);
         await db.updateRecipe(recipe);
         throw redirect(303, '/recipes/'+getid.id)

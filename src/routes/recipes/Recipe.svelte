@@ -24,27 +24,29 @@
         </div>
     {/if}
 
-    <h3>sections</h3>
     {#each seclist as section}
         <!-- {console.log(seclist)} -->
-        <h3>ingredients</h3>
-        <ul class = 'ingredients'>
-            {#each section.ingredients as ingredient}
-                <li>
-                    {ingredient.name} : {ingredient.amount}
-                </li>
-            {/each}
-        </ul>
+        <h2>{section.title}</h2>
+        <div class = "sectioncontent">
+            <h3>ingredients</h3>
+            <ul class = 'ingredients'>
+                {#each section.ingredients as ingredient}
+                    <li>
+                        {ingredient.name} : {ingredient.amount}
+                    </li>
+                {/each}
+            </ul>
 
-        <h3>steps</h3>
+            <h3>steps</h3>
 
-        <ol class = 'steps'>
-            {#each section.steps as step}
-                <li>
-                    {step.action}
-                </li>
-            {/each}
-        </ol>
+            <ol class = 'steps'>
+                {#each section.steps as step}
+                    <li>
+                        {step.action}
+                    </li>
+                {/each}
+            </ol>
+        </div>
     {/each}
 
 
@@ -69,5 +71,15 @@
     }
     h2 {
         margin-bottom: 0;
+    }
+
+    div.sectioncontent {
+        margin-top: .5em;
+        margin-bottom: .5em;
+        border-style: dotted;
+        border-width: 1px;
+        border-radius: 30px;
+        border-color: black;
+        background-color: rgba(255, 255, 255, 0.26)   
     }
 </style>
