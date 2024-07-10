@@ -67,13 +67,15 @@
 
             {#if section.steps.length > 0}
             <h3 class = "sectionnotes ">section notes</h3>
-            <div class = 'steps'>
+            <ul class = 'sectionnotes'>
                 {#each section.steps as step}
+                <li>
                     <div>
-                        {step.number} .  {step.action}
+                        {step.action}
                     </div>
+                </li>
                 {/each}
-            </div>
+                </ul>
             {/if}
         </div>
         {/if}
@@ -109,9 +111,9 @@
         white-space:pre-wrap;
         border-style: none;
         padding: .2rem;
-        font-style: italic;
+        /* font-style: italic; */
 	    font-weight:lighter;
-        font-size: 17px;
+        font-size: 20px;
         font-family: pixelify;
         color: var(--text-color);
         /* margin-right: 5rem; */
@@ -119,11 +121,26 @@
     }
 
     ul {
-        list-style: square;
+        margin-top:0;
+        list-style: symbols("--  ");
         text-align: center;
         display: flex;
         flex-wrap:wrap;
         justify-content: center;
+    }
+
+    ul.sectionnotes {
+        list-style-type: symbols("--  ");
+        text-align: center;
+        white-space:pre-wrap;
+        border-style: none;
+        padding: .2rem;
+        /* font-style: italic; */
+	    font-weight:lighter;
+        font-size: 20px;
+        font-family: pixelify;
+        color: var(--text-color);
+        /* margin-right: 5rem; */
     }
     h2 {
         margin-bottom: 0;

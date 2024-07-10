@@ -148,7 +148,7 @@
                 {#if sectionlist.length > 1}
                     <div class = "titleelement">
                         <label>
-                            <input class = "text" type = "text" placeholder = "section title" id = "user" name="user" bind:value = {sectionlist[j].title} required minlength = 1 size = 10/>
+                            <input class = "sectiontitle" type = "text" placeholder = "section title" id = "user" name="user" bind:value = {sectionlist[j].title} required minlength = 1 size = 10/>
                         </label>
                         {#if sectionlist.length !== 1}
                         <button class = "remove" type= "button" on:click={()=>removeSection(j)}>x</button>
@@ -222,40 +222,46 @@
         border-style: none;
         padding: .2rem;
         text-align: center;
-        font-style: italic;
+        /* font-style: italic; */
 	    font-weight:lighter;
-        font-size: 17px;
+        font-size: 19px;
         font-family: pixelify;
         color: var(--text-color)
        
+    }
+
+    input.sectiontitle{
+        background:none;
+        border-style: none;
+        padding: .2rem;
+        text-align: center;
+        /* font-style: italic; */
+	    font-weight:lighter;
+        font-size: 24px;
+        font-family: pixelify;
+        color: var(--text-color)
     }
 
     input.title {
         margin-top: .5rem;
         background-color: none;
         border-style:none;
-        /* border-width: 1px;
-        border-top:none;
-        border-left:none;
-        border-right:none;
-        border-bottom: auto;
-        border-color: var(--text-color); */
         padding: .2rem;
         text-align: center;
-        font-style: italic;
+        /* font-style: italic; */
 	    font-weight:lighter;
         font-size: 24px;
         font-family: pixelify;
         color: var(--text-color);
-        background-color: #fffefb;
+        background-color: var(--input-color);
        
     }
 
     textarea.text {
-        background-color: #fffefb;
+        background-color: var(--input-color);
         border-style: none;
         padding: .2rem;
-        font-style: italic;
+        /* font-style: italic; */
 	    font-weight:lighter;
         font-size: 17px;
         font-family: pixelify;
@@ -263,6 +269,9 @@
        
     }
     input.title:focus {
+        outline:none;
+    }
+    input.sectiontitle:focus {
         outline:none;
     }
     input.text:focus {
@@ -292,7 +301,7 @@
         font-style: italic;
 	    font-weight: lighter;
         font-family: pixelify;
-        color: rgba(107, 60, 45, 0.404);
+        color: var(--steplabel-color);
 
     }
 
@@ -347,7 +356,8 @@
     }
 
     button.remove {
-        background-color: rgba(255, 30, 0, 0.253);
+        background-color: var(--removebg-color);
+        color: var(--remove-color);
         padding-left: .5rem;
         padding-right: .5rem;
         padding-top: .2rem;
