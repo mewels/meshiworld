@@ -333,7 +333,7 @@ export async function listAllUsers() {
 export async function getRecipe(id) {
     const recipe = await db.recipe.findUnique({
         where: {
-            id: Number(id),
+            id: parseInt(id),
         },
         include: {
             sections: {
