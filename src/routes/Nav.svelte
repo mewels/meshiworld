@@ -31,7 +31,7 @@
 	}
 </script>
 
-<div class="outer page-width page padding">
+<div class="outer page-width page padding" style="background: none;">
     <div class = "container">
         <header>meshi  ♡  world</header>
         <nav aria-label="bagelzone">

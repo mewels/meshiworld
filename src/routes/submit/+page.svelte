@@ -1,6 +1,11 @@
 <script>
     import {page} from '$app/stores'
     import InfoHead from "$lib/InfoHead.svelte";
+    import { enhance } from '$app/forms';
+
+    /** @type {import('./$types').ActionData} */
+	export let form;
+
     // import Img from '../lib/Img.svelte';
     import Nav from "../Nav.svelte";
 
@@ -69,7 +74,7 @@
         status.fill("none");
         status[j] = "inline";
     }
-
+    
     $: if (data.sessionuser) {
         user = data.sessionuser.username
         userid = data.sessionuser.id
@@ -90,9 +95,10 @@
 
 <div>
     <div class = "submit">
-    <form method="POST" action='?/create'>
-        <h2>drop the method~</h2>
+    <form method="POST" action='?/create' use:enhance>
 
+        <h2>drop the method~</h2>
+        
         {#if data.sessionuser}
         <div class = "usertag" style="text-align:center;">submitting as 
             <a href = "https://meshi.world/user/{user}">{user}
@@ -112,11 +118,16 @@
             </label>
         </div>
 
-
-
         <div class = "element">
             <textarea class = "text" bind:value = {notes} name = "notes" id = "notes" placeholder="notes (optional)" size = 30/>
         </div>
+
+        {#if form?.missing}
+        <div style="text-align:center; color: var(--remove-color)">
+            <div style="display:none;">{selectSection(form?.index)}</div>
+            error: {form?.message}
+        </div>
+        {/if}
 
         <div class = "tab">
             {#each sectionlist as x,j}
@@ -173,12 +184,14 @@
                 {#if sectionlist.length > 0}
                     <h3>section notes</h3>
                     {#each sectionlist[j].steps as s, i}
-                    <div class = "stepelement">
+
                         <label>
+                            <div class = "stepelement">
                             {sectionlist[j].steps[i].number} .
-                            <textarea class = "text" id = {i} name="action" bind:value = {sectionlist[j].steps[i].action} minlength = 1 size = 20/>
+                            <textarea class = "text alt" id = {i} name="action" bind:value = {sectionlist[j].steps[i].action} minlength = 1 size = 20/>
+                        </div>
                         </label>
-                    </div>
+
                     {/each}
 
                     <div class = "element">
@@ -279,12 +292,19 @@
         color: var(--text-color)
        
     }
+
+    textarea.alt {
+        background-color: var(--input-alt-color);
+    }
+
     input.title:focus {
         outline:none;
     }
+    
     input.sectiontitle:focus {
         outline:none;
     }
+
     input.text:focus {
         outline:none;
     }
@@ -318,6 +338,21 @@
 
     }
 
+    /* div.sectionnoteelement > textarea{
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1;
+        display: flex;
+        flex-wrap:wrap;
+        justify-content: center;
+        font-style: italic;
+	    font-weight: lighter;
+        font-family: pixelify;
+        color: var(--steplabel-color);
+        background-color: var(--input-alt-color);
+
+    } */
+
     div.titleelement {
         margin-top: .5em;
         margin-bottom: .5em;
@@ -338,6 +373,7 @@
         background-color: var(--section-color);
 
     }
+
 
     div.ingredient > input {
         width: 10rem;

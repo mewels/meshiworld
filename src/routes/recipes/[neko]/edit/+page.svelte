@@ -1,8 +1,12 @@
 <script>
     import {page} from '$app/stores'
     import InfoHead from "$lib/InfoHead.svelte";
+    import { enhance } from '$app/forms';
     // import Img from '../lib/Img.svelte';
     // import Nav from "../Nav.svelte";
+
+    /** @type {import('./$types').ActionData} */
+	export let form;
 
     export let data;
 
@@ -91,7 +95,7 @@
 
 <div>
     <div class = "submit">
-    <form method="POST" action='?/update'>
+    <form method="POST" action='?/update' use:enhance>
         <h2>drop the method~</h2>
         {#if data.sessionuser}
             <div class = "usertag" style="text-align:center;">submitting as 
@@ -117,6 +121,13 @@
         <div class = "element">
             <textarea class = "text" bind:value = {notes} name = "notes" id = "notes" placeholder="notes (optional)" size = 30/>
         </div>
+
+        {#if form?.missing}
+        <div style="text-align:center; color: var(--remove-color)">
+            <div style="display:none;">{selectSection(form?.index)}</div>
+            error: {form?.message}
+        </div>
+        {/if}
 
         <div class = "tab">
             {#each sectionlist as x,j}
@@ -176,7 +187,7 @@
                 <div class = "stepelement">
                     <label>
                         {sectionlist[j].steps[i].number} .
-                        <textarea class = "text" id = {i} name="action" bind:value = {sectionlist[j].steps[i].action} minlength = 1 size = 20/>
+                        <textarea class = "text alt" id = {i} name="action" bind:value = {sectionlist[j].steps[i].action} minlength = 1 size = 20/>
                     </label>
                 </div>
                 {/each}
@@ -280,6 +291,10 @@
 
     textarea.text:focus {
         outline:none;
+    }
+
+    textarea.alt {
+        background-color: var(--input-alt-color);
     }
 
     div.element {

@@ -1,5 +1,6 @@
 import {getRecipe} from '$lib/server/database.js';
-import { redirect } from '@sveltejs/kit';
+import { redirect, fail } from '@sveltejs/kit';
+
 import * as db from '$lib/server/database.js';
 
 export async function load({params}) {
@@ -19,21 +20,35 @@ export const actions = {
 
 
         for (const section of temp.sections)
-        {  
-            for (const step of section.steps) {
-                console.log("should be here")
-                console.log(section)
-                if (step.action === '' || step.action === "") {
-                    section.steps.splice(step.number-1,1)
-                    let index = 1
-                    for (const s of section.steps){
-                        s.number = index;
-                        index++;
+            {  
+                if (section.title === '' || section.title === "") {
+                    return fail(400, {index : section.number-1, missing: true,message: "please fill out all required fields"})
+                }
+    
+                for (const ingredient of section.ingredients)
+                {
+                    if ((ingredient.name === '' || ingredient.amount === '') || (ingredient.name === "" || ingredient.amount === "")) {
+                        return fail(400, {index : section.number-1, missing: true,message: "please fill out all required fields"})
                     }
                 }
-
+                for (const step of section.steps) {
+                    if (step.action === '' || step.action === "") {
+                        section.steps.splice(step.number-1,1)
+                        let index = 1
+                        for (const s of section.steps){
+                            s.number = index;
+                            index++;
+                        }
+                    }
+                }
             }
-        }
+    
+            for (const recstep of temp.recsteps) 
+            {
+                if (recstep.action === '' || recstep.action === "") {
+                    return fail(400, {index : recstep.number-1, missing: true,message: "please fill out all required fields"})
+                }
+            }
 
         recipe = JSON.stringify(temp)
 

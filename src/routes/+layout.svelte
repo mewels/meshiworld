@@ -2,7 +2,12 @@
     import { page } from '$app/stores';
     import Nav from './Nav.svelte';
     import '../app.css'
+	import { onMount } from 'svelte';
 	export let data;
+	onMount (() => {
+		document.querySelector("body").classList=["water"]
+	})
+
 </script>
 
 <a href="#main" class="skip-to-content">Skip to content</a>
