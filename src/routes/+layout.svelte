@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 	export let data;
 	onMount (() => {
-		document.querySelector("body").classList=["water"]
+		document.querySelector("body").classList=["latte"]
 	})
 
 </script>
