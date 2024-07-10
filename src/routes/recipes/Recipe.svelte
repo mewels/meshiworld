@@ -65,27 +65,26 @@
                 {/each}
             </ul>
 
-            <h3>steps</h3>
-
-            <ol class = 'steps'>
+            {#if section.steps.length > 0}
+            <h3 class = "sectionnotes ">section notes</h3>
+            <div class = 'steps'>
                 {#each section.steps as step}
-                    <li>
-                        {step.action}
-                    </li>
+                    <div>
+                        {step.number} .  {step.action}
+                    </div>
                 {/each}
-            </ol>
+            </div>
+            {/if}
         </div>
         {/if}
     {/each}
 
-    <h3>Instructions</h3>
-    <ol class = 'steps'>
+    <h3>instructions</h3>
+    <div class = 'steps'>
         {#each recsteplist as recstep}
-            <li>
-                {recstep.action}
-            </li>
+            {recstep.number} .  {recstep.action}
         {/each}
-    </ol>
+    </div>
 
 
 
@@ -106,15 +105,35 @@
     }
 
     .steps {
+        text-align: center;
         white-space:pre-wrap;
+        border-style: none;
+        padding: .2rem;
+        font-style: italic;
+	    font-weight:lighter;
+        font-size: 17px;
+        font-family: pixelify;
+        color: var(--text-color);
+        /* margin-right: 5rem; */
+
+    }
+
+    ul {
+        list-style: square;
+        text-align: center;
+        display: flex;
+        flex-wrap:wrap;
+        justify-content: center;
     }
     h2 {
         margin-bottom: 0;
+        color:var(--text-color);
     }
     h3 {
         margin-top:0;
         margin-bottom:0;
     }
+
     div.sectioncontent {
         margin-bottom: .5em;
         padding-top: .5em;
@@ -124,6 +143,11 @@
         border-color: black;
         background-color: var(--section-color);
 
+    }
+
+    div.recipe {
+        margin:2rem;
+        margin-top:0;
     }
 
     div.tab {

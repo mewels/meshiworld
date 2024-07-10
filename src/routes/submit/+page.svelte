@@ -92,27 +92,30 @@
     <div class = "submit">
     <form method="POST" action='?/create'>
         <h2>drop the method~</h2>
-        <div class = "element">
-            <label>
-                <input type = "text" placeholder = "recipe name" id = "name" name="name" bind:value = {name} required = "true" minlength = 1 size = 20/>
-            </label>
-        </div>
 
         {#if data.sessionuser}
-            <div class = "usertag" style="text-align:center;">submitting as 
-                <a href = "https://meshi.world/user/{user}">{user}
-                </a>
-            </div>
+        <div class = "usertag" style="text-align:center;">submitting as 
+            <a href = "https://meshi.world/user/{user}">{user}
+            </a>
+        </div>
         {:else}
-            <div class = "element">
-                <label>
-                    <input type = "text" placeholder = "your name" id = "user" name="user" bind:value = {user} minlength = 1 size = 10/>
-                </label>
-            </div>
+        <div class = "element">
+            <label>
+                <input class = "text" type = "text" placeholder = "your name" id = "user" name="user" bind:value = {user} minlength = 1 size = 10/>
+            </label>
+        </div>
         {/if}
 
         <div class = "element">
-            <textarea bind:value = {notes} name = "notes" id = "notes" placeholder="notes (optional)" size = 30/>
+            <label>
+                <input class = "title" type = "text" placeholder = "recipe name" id = "name" name="name" bind:value = {name} required = "true" minlength = 1 size = 20/>
+            </label>
+        </div>
+
+
+
+        <div class = "element">
+            <textarea class = "text" bind:value = {notes} name = "notes" id = "notes" placeholder="notes (optional)" size = 30/>
         </div>
 
         <div class = "tab">
@@ -144,7 +147,7 @@
             {#if sectionlist.length > 1}
                 <div class = "titleelement">
                     <label>
-                        <input type = "text" placeholder = "section title" id = "user" name="user" bind:value = {sectionlist[j].title} required minlength = 1 size = 10/>
+                        <input class = "text" type = "text" placeholder = "section title" id = "user" name="user" bind:value = {sectionlist[j].title} required minlength = 1 size = 10/>
                     </label>
                     {#if sectionlist.length !== 1}
                     <button class = "remove" type= "button" on:click={()=>removeSection(j)}>x</button>
@@ -155,9 +158,9 @@
                 <h3>ingredients</h3>
                 {#each sectionlist[j].ingredients as a, i}
                     <div class = "element ingredient">
-                            <input type = "text" id = {i} placeholder="name of ingredient" name="name" bind:value = {sectionlist[j].ingredients[i].name} required minlength = 1 size = 20
+                            <input class = "text" type = "text" id = {i} placeholder="name of ingredient" name="name" bind:value = {sectionlist[j].ingredients[i].name} required minlength = 1 size = 20
                             />
-                            <input type = "text" id = {i} placeholder = "amount of ingredient" name="amount" bind:value = {sectionlist[j].ingredients[i].amount} required minlength = 1 size = 20
+                            <input class = "text" type = "text" id = {i} placeholder = "amount of ingredient" name="amount" bind:value = {sectionlist[j].ingredients[i].amount} required minlength = 1 size = 20
                             />
                     </div>
                 {/each}
@@ -167,13 +170,13 @@
                     <button type= "button" on:click = {() => removeIngredient(j)}>-</button>
                 </div>
 
-                {#if sectionlist.length > 1}
-                    <h3>steps for this section (optional)</h3>
+                {#if sectionlist.length > 0}
+                    <h3>section notes</h3>
                     {#each sectionlist[j].steps as s, i}
-                    <div class = "element">
+                    <div class = "stepelement">
                         <label>
-                            [{sectionlist[j].steps[i].number}]:
-                            <textarea id = {i} name="action" bind:value = {sectionlist[j].steps[i].action} minlength = 1 size = 20/>
+                            {sectionlist[j].steps[i].number} .
+                            <textarea class = "text" id = {i} name="action" bind:value = {sectionlist[j].steps[i].action} minlength = 1 size = 20/>
                         </label>
                     </div>
                     {/each}
@@ -193,11 +196,12 @@
         <h3>instructions</h3>
 
         {#each recsteplist as r, i}
-        <div class = "element">
+        <div class = "stepelement">
             <label>
-                [{recsteplist[i].number}]:
-                <textarea id = {i} name="action" bind:value = {recsteplist[i].action} required minlength = 1 size = 20/>
+                {recsteplist[i].number} .
+                <textarea class = "text" id = {i} name="action" bind:value = {recsteplist[i].action} required minlength = 1 size = 20/>
             </label>
+
         </div>
         {/each}
 
@@ -224,6 +228,62 @@
 </div>
 
 <style>
+    input.text {
+        background:none;
+        border-style: none;
+        padding: .2rem;
+        text-align: center;
+        font-style: italic;
+	    font-weight:lighter;
+        font-size: 17px;
+        font-family: pixelify;
+        color: var(--text-color)
+       
+    }
+
+    input.title {
+        margin-top: .5rem;
+        background-color: none;
+        border-style:none;
+        /* border-width: 1px;
+        border-top:none;
+        border-left:none;
+        border-right:none;
+        border-bottom: auto;
+        border-color: var(--text-color); */
+        padding: .2rem;
+        text-align: center;
+        font-style: italic;
+	    font-weight:lighter;
+        font-size: 24px;
+        font-family: pixelify;
+        color: var(--text-color);
+        background-color: #fffefb;
+    }
+
+    textarea.text {
+        background-color: #fffefb;
+        border-style: none;
+        padding: .2rem;
+        font-style: italic;
+	    font-weight:lighter;
+        font-size: 17px;
+        font-family: pixelify;
+        color: var(--text-color)
+       
+    }
+    input.title:focus {
+        outline:none;
+    }
+    
+    input.text:focus {
+        outline:none;
+    }
+
+    textarea.text:focus {
+        outline:none;
+    }
+
     div.element {
         margin-top: .5em;
         margin-bottom: .5em;
@@ -231,6 +291,21 @@
         display: flex;
         flex-wrap:wrap;
         justify-content: center;
+        color: var(--text-color);
+    }
+
+    div.stepelement {
+        margin-top: .5em;
+        margin-bottom: .5em;
+        line-height: 1;
+        display: flex;
+        flex-wrap:wrap;
+        justify-content: center;
+        font-style: italic;
+	    font-weight: lighter;
+        font-family: pixelify;
+        color: rgba(107, 60, 45, 0.404);
+
     }
 
     div.titleelement {
@@ -264,6 +339,10 @@
     div.tab {
         margin-bottom: 0em;
     }
+    
+    button {
+        font-family: pixelify;
+    }
 
     button.tablink {
         background-color: var(--background-color);
@@ -275,15 +354,18 @@
     }
 
     button.remove {
-        background-color: rgba(255, 30, 0, 0.253);
+        color:var(--theme-color);
+        background-color: rgba(255, 30, 0, 0.226);
         padding-left: .5rem;
         padding-right: .5rem;
         padding-top: .2rem;
         padding-bottom: .2rem;
+
     }
 
     div.submit {
         margin: 2em;
+        margin-top:0;
     }
 
     div.usertag {
@@ -302,5 +384,11 @@
     h3 {
         margin-bottom: 0;
         margin-top: 0;
+    }
+
+    h2 {
+        margin-top: 0;
+        margin-bottom: 0;
+        color: var(--text-color);
     }
 </style>

@@ -19,9 +19,9 @@
 <div>
     <form method="POST" action='?/{searchkey}' use:enhance>
         <label>
-            <input type = "text"  placeholder = 'Search by name or ingredient' name = "searchkey" id = "searchkey"  autocomplete="off"
+            <input class = "text" type = "text"  placeholder = 'Search by name or ingredient' name = "searchkey" id = "searchkey"  autocomplete="off"
             value = {form?.results === undefined ? '' : ''}
-            size = 16
+            size = 50
             />
         </label>
     </form>
@@ -63,9 +63,27 @@
 </div>
 
 <style>
+    input.text {
+        background:none;
+        border-style: none;
+        padding: .2rem;
+        padding-top:.4rem;
+        text-align: center;
+        font-style: italic;
+	    font-weight:lighter;
+        font-size: 25px;
+        font-family: pixelify;
+        color: var(--text-color);
+    }
+
+    input.text:focus {
+        outline:none;
+    }
+
     ul {
         list-style-type: none;
         padding-left: 0px;
+        margin-left: 2rem;
     }
 
     form {

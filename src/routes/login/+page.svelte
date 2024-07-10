@@ -15,13 +15,13 @@
     <form method='POST' action = "?/login">
         <div class = "element">
             <label>
-                <input type = "text" placeholder = "username" id = "name" name="name" bind:value = {name} pattern = "\w+" required = "true" minlength = 1 size = 20 list = ''/>
+                <input class ="text" type = "text" placeholder = "username" id = "name" name="name" bind:value = {name} pattern = "\w+" required = "true" minlength = 1 size = 20 list = ''/>
             </label>
         </div>
 
         <div class = "element">
             <label>
-                <input type = "password" placeholder = "password" id = "pass" name="pass" bind:value = {pass} required = "true" minlength = 1 size = 20/>
+                <input class ="text" type = "password" placeholder = "password" id = "pass" name="pass" bind:value = {pass} required = "true" minlength = 1 size = 20/>
             </label>
         </div>
         
@@ -65,5 +65,21 @@
         display: flex;
         flex-wrap:wrap;
         justify-content: center;
+    }
+    
+    input.text {
+        background:none;
+        border-style: none;
+        padding: .2rem;
+        text-align: center;
+        font-style: italic;
+	    font-weight:lighter;
+        font-size: 25px;
+        font-family: pixelify;
+        color: var(--text-color)
+    }
+
+    input.text:focus {
+        outline:none;
     }
 </style>

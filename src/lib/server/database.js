@@ -8,9 +8,6 @@ String.prototype.toTitleCase = function () {
 // PRISMA FUNCTIONS
 export async function addRecipe(recipe) {
     const recipeobject = JSON.parse(recipe);
-
-    console.log(recipeobject)
-
     let sectionlist = [];
 
     var temp = await db.recipe.create({ 

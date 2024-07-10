@@ -73,7 +73,8 @@
 	}
 
     header {
-        font-size: 20px;
+        font-size: 30px;
+		color: var(--text-color);
     }
 	ul {
 		display: flex;

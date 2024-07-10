@@ -29,6 +29,10 @@
 
     p {
         letter-spacing: 2px;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        color: var(--text-color);
+        font-size: 22px;
     }
 
 </style> 

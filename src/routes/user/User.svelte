@@ -8,7 +8,7 @@
     let recipeid = null;
 </script>
 <div class="User">
-    <h2>{pageuser}'s page :)</h2>
+    <h2>{pageuser}'s page</h2>
 
 
     <div class = 'recipelist'>
@@ -64,4 +64,5 @@
     div.recipelist {
         padding-bottom: 3rem;
     }
+
 </style>
