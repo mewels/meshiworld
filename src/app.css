@@ -21,43 +21,43 @@
 
 .latte {
 	--background-color: #f8eed9;
-	--section-color: rgba(133, 84, 69, 0.253);
-	--mid-grey: rgb(180, 180, 180);
+	--section-color: rgb(219, 199, 179);
+	--mid-grey: #3a3221;
 	--text-color: #3a3221;
 	--theme-color: rgb(138, 97, 85);
 	--input-color: #fffefb;
 	--input-alt-color: #fffefb;
-	--button-color: rgba(255, 255, 255, 0.637);
-	--steplabel-color: rgba(107, 60, 45, 0.404);
-	--removebg-color: rgba(255, 30, 0, 0.226);
+	--button-color: rgb(252, 248, 241);
+	--steplabel-color: rgb(191, 166, 147);
+	--removebg-color: rgb(227, 160, 138);
 	--remove-color: rgb(163, 89, 67);
 }
 
 .matcha {
-	--section-color: #d1e6b09c;
-	--background-color: rgb(236, 245, 221);
-	--mid-grey: rgb(180, 180, 180);
+	--section-color: #d1e6b0;
+	--background-color: rgb(183, 205, 145);
+	--mid-grey: #1d3d0e;
 	--text-color: #1d3d0e;
 	--theme-color: rgb(126, 163, 67);
-	--input-color: #fffefb;
-	--input-alt-color: #fffefb;
-	--button-color: rgba(255, 255, 255, 0.637);
-	--steplabel-color: rgba(61, 107, 45, 0.705);
-	--removebg-color: rgba(255, 30, 0, 0.226);
+	--input-color: #f4ffd7;
+	--input-alt-color: #f4ffd7;
+	--button-color: rgb(252, 248, 241);
+	--steplabel-color: #1d3d0e9f;
+	--removebg-color: rgb(227, 160, 138);
 	--remove-color: rgb(163, 89, 67);
 }
 
 .water {
 	--section-color: #eff7fa;
-	--background-color: rgba(255, 255, 255, 0.932);
-	--mid-grey: rgb(180, 180, 180);
+	--background-color: rgb(255, 255, 255);
+	--mid-grey: #0a2530;
 	--text-color: #0a2530;
 	--theme-color: rgb(75, 179, 179);
 	--input-color: #eff7fa;
-	--input-alt-color: rgba(255, 255, 255, 0.945);
-	--button-color: rgba(255, 255, 255, 0.637);
-	--steplabel-color: rgba(45, 87, 107, 0.705);
-	--removebg-color: rgba(255, 30, 0, 0.226);
+	--input-alt-color: rgb(255, 255, 255);
+	--button-color: rgb(252, 248, 241);
+	--steplabel-color: rgb(107, 136, 151);
+	--removebg-color: rgb(227, 160, 138);
 	--remove-color: rgb(163, 89, 67);
 }
 

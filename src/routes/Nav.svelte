@@ -86,6 +86,7 @@
 		flex-wrap: wrap;
         align-content: center;
         justify-content: center;
+		background: none;
 	}
 
 	a:active {
@@ -99,7 +100,7 @@
     }
 
 	a[aria-current='page'] {
-		background: var(--background-color);
+		/* background: var(--background-color); */
 		color:var(--theme-color);
 	}
 </style>

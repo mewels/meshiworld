@@ -184,13 +184,13 @@
                 {#if sectionlist.length > 0}
                     <h3>section notes</h3>
                     {#each sectionlist[j].steps as s, i}
-
-                        <label>
-                            <div class = "stepelement">
-                            {sectionlist[j].steps[i].number} .
-                            <textarea class = "text alt" id = {i} name="action" bind:value = {sectionlist[j].steps[i].action} minlength = 1 size = 20/>
+                        <div class = "stepelement">
+                            <label>
+                                {sectionlist[j].steps[i].number} .
+                                <textarea class = "text alt" id = {i} name="action" bind:value = {sectionlist[j].steps[i].action} minlength = 1 size = 20/>
+                            </label>
                         </div>
-                        </label>
+
 
                     {/each}
 
