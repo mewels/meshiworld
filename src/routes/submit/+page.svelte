@@ -263,7 +263,7 @@
 	    font-weight:lighter;
         font-size: 24px;
         font-family: pixelify;
-        color: var(--text-color)
+        color: var(--text-color);
     }
 
     input.title {
@@ -371,7 +371,7 @@
         border-width: 1px;
         border-color: black;
         background-color: var(--section-color);
-
+        position: relative;
     }
 
 
@@ -406,7 +406,9 @@
         padding-right: .5rem;
         padding-top: .2rem;
         padding-bottom: .2rem;
-
+        position: absolute;
+        right: 20px;
+        top: 15px;
     }
 
     div.submit {
