@@ -1,14 +1,84 @@
 :root {
-	font-size: 18px;
+	font-size: 20px;
 	font-weight: normal;
 	line-height: 1.5;
-
+	font-family: pixelify;
+	font-weight: 400;
+	
 	--page-padding: 1rem;
 
 	--background-color: #faf4e7;
+	--section-color: rgba(163, 89, 67, 0.103);
 	--mid-grey: rgb(180, 180, 180);
 	--text-color: #3a3221;
 	--theme-color: rgb(163, 89, 67);
+	--input-color: #fffefb;
+	--button-color: rgba(255, 255, 255, 0.637);
+	--steplabel-color: rgba(107, 60, 45, 0.404);
+	--removebg-color: rgba(255, 30, 0, 0.226);
+	--remove-color: rgb(163, 89, 67);
+}
+
+.latte {
+	--background-color: #f8eed9;
+	--section-color: rgb(219, 199, 179);
+	--mid-grey: #3a3221;
+	--text-color: #3a3221;
+	--theme-color: rgb(138, 97, 85);
+	--input-color: #fffefb;
+	--input-alt-color: #fffefb;
+	--button-color: rgb(252, 248, 241);
+	--steplabel-color: rgb(191, 166, 147);
+	--removebg-color: rgb(227, 160, 138);
+	--remove-color: rgb(163, 89, 67);
+}
+
+.matcha {
+	--section-color: rgb(183, 205, 145);
+	--background-color: #d1e6b0;
+	--mid-grey: #1d3d0e;
+	--text-color: #1d3d0e;
+	--theme-color: rgb(126, 163, 67);
+	--input-color: #f4ffd7;
+	--input-alt-color: #f4ffd7;
+	--button-color: rgb(252, 248, 241);
+	--steplabel-color: #1d3d0e9f;
+	--removebg-color: rgb(227, 160, 138);
+	--remove-color: rgb(163, 89, 67);
+}
+
+.water {
+	--section-color: #eff7fa;
+	--background-color: rgb(255, 255, 255);
+	--mid-grey: #0a2530;
+	--text-color: #0a2530;
+	--theme-color: rgb(75, 179, 179);
+	--input-color: #eff7fa;
+	--input-alt-color: rgb(255, 255, 255);
+	--button-color: rgb(246, 253, 255);
+	--steplabel-color: rgb(107, 136, 151);
+	--removebg-color: rgb(227, 160, 138);
+	--remove-color: rgb(163, 89, 67);
+}
+
+.puerh {
+	--section-color: #231f2b;
+	--background-color: #33161c;
+	--mid-grey: #0a2530;
+	--text-color: #a8883d;
+	--theme-color: rgb(243, 223, 159);
+	--input-color: #583538;
+	--input-alt-color: #501417;
+	--button-color: rgb(53, 47, 68);
+	--steplabel-color: a8883d(107, 136, 151);
+	--removebg-color: rgb(227, 160, 138);
+	--remove-color: rgb(163, 89, 67);
+}
+
+
+@font-face {
+	font-family: pixelify;
+	src: url("../src/routes/assets/pixelify_sans/PixelifySans-VariableFont_wght.ttf") format("truetype");
 }
 
 body {
@@ -30,6 +100,29 @@ body {
 	padding: 0 var(--page-padding);
 }
 
+button {
+	background-color: var(--button-color);
+	font-family: pixelify;
+	font-size: 20px;
+	color: var(--text-color);
+	padding-left: .5rem;
+	padding-right: .5rem;
+	padding-top: .2rem;
+	padding-bottom: .2rem;
+}
+
+select {
+	padding: .2rem;
+	background-color: var(--button-color);
+	font-family: pixelify;
+	font-size: 20px;
+	color: var(--text-color);
+}
+
+option {
+	background-color: var(--button-color);
+}
+
 a.visited{
     color: var(--text-color);
 }
@@ -46,5 +139,6 @@ h2 {
 
 h3 {
     text-align: center;
-    font-weight: 50;
+    font-style: italic;
+	font-weight:lighter;
 }

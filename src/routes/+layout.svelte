@@ -1,8 +1,20 @@
 <script>
     import { page } from '$app/stores';
+	import { browser } from '$app/environment';
     import Nav from './Nav.svelte';
+	import Switcher from '../lib/Switcher.svelte';
     import '../app.css'
+	import { onDestroy, onMount } from 'svelte';
+	import { theme } from '../stores.js'
 	export let data;
+
+	// $: document.querySelector("body").classList=[$theme]
+
+	const unsubscribe = theme.subscribe((value) => {
+		if(browser)document.querySelector("body").classList=[value]
+	});
+	onMount(()=>{if(browser)document.querySelector("body").classList=[$theme]})
+	onDestroy(unsubscribe)
 </script>
 
 <a href="#main" class="skip-to-content">Skip to content</a>
@@ -11,6 +23,7 @@
 	<main id="main" class="page-width page-padding">
 		<slot />
 	</main>
+	<span class = "switch"><Switcher/></span>
 </div>
 
 <style>
@@ -20,6 +33,14 @@
 		padding-bottom: 4rem;
 		container-type: inline-size;
 		position: relative;
+
+	}
+
+	.switch {
+		position:fixed;
+		bottom: 50px;
+		right: 50px;
+		font-family:pixelify;
 	}
 
 	.skip-to-content {

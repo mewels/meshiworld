@@ -25,6 +25,10 @@ export const actions = {
         await db.claimRecipe(userid,recipeid);
     },
 
+    delete: async() => {
+        await db.deleteAll();
+    },
+
     logout: async ({cookies,locals}) => {
         cookies.delete("Authorization", {path: '/'});
         locals.user = null;

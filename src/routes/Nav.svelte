@@ -31,7 +31,7 @@
 	}
 </script>
 
-<div class="outer page-width page padding">
+<div class="outer page-width page padding" style="background: none;">
     <div class = "container">
         <header>meshi  ♡  world</header>
         <nav aria-label="bagelzone">
@@ -73,7 +73,8 @@
 	}
 
     header {
-        font-size: 20px;
+        font-size: 30px;
+		color: var(--text-color);
     }
 	ul {
 		display: flex;
@@ -85,6 +86,7 @@
 		flex-wrap: wrap;
         align-content: center;
         justify-content: center;
+		background: none;
 	}
 
 	a:active {
@@ -98,7 +100,7 @@
     }
 
 	a[aria-current='page'] {
-		background: var(--background-color);
+		/* background: var(--background-color); */
 		color:var(--theme-color);
 	}
 </style>

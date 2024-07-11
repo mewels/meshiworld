@@ -10,7 +10,7 @@
 
 <InfoHead pagedescription = "yay!" pagetitle = {data.recipe.name} pageurl={$page.url}/>
 <div>
-    <Recipe name = {data.recipe.name} user = {data.recipe.user} notes = {data.recipe.notes} ilist = {data.recipe.ingredients} slist = {data.recipe.steps} userid = {data.recipe.userId}
+    <Recipe name = {data.recipe.name} user = {data.recipe.user} notes = {data.recipe.notes} seclist={data.recipe.sections} recsteplist = {data.recipe.recsteps} userid = {data.recipe.userId}
     />
 
     {#if data.sessionuser}
@@ -20,6 +20,7 @@
                     edit
                 </button>
             </form>
+            <form method='POST' action='?/delete'><button>delete this recipe</button></form>
         {/if}
     {/if}
 </div>

@@ -19,9 +19,9 @@
 <div>
     <form method="POST" action='?/{searchkey}' use:enhance>
         <label>
-            <input type = "text"  placeholder = 'Search by name or ingredient' name = "searchkey" id = "searchkey"  autocomplete="off"
+            <input class = "text" type = "text"  placeholder = 'search by name or ingredient' name = "searchkey" id = "searchkey"  autocomplete="off"
             value = {form?.results === undefined ? '' : ''}
-            size = 16
+            size = 50
             />
         </label>
     </form>
@@ -50,7 +50,7 @@
                 {/each}
             {:else}
                 {#if Object.is(form?.results, []) ||  form?.results.length === 0}
-                    <p>No results found</p>
+                    <p>no results found...</p>
                 {:else} 
                     {#each form?.results as {id, name}}
                         <li><a href="/recipes/{id}" data-sveltekit-preload-data>{name}</a></li>
@@ -63,9 +63,27 @@
 </div>
 
 <style>
+    input.text {
+        background:none;
+        border-style: none;
+        padding: .2rem;
+        padding-top:.4rem;
+        text-align: center;
+        font-style: italic;
+	    font-weight:lighter;
+        font-size: 25px;
+        font-family: pixelify;
+        color: var(--text-color);
+    }
+
+    input.text:focus {
+        outline:none;
+    }
+
     ul {
         list-style-type: none;
         padding-left: 0px;
+        margin-left: 2rem;
     }
 
     form {

@@ -14,7 +14,7 @@ export async function load() {
 export const actions = {
     isearch: async ({request}) => {
         const data = await request.formData();
-        const results = await searchIngredient(data.get("searchkey"))
+        const results = await searchIngredient(data.get("searchkey").trim())
         return {
             results: results
         };
@@ -22,7 +22,7 @@ export const actions = {
 
     nsearch: async ({request}) => {
         const data = await request.formData();
-        const results = await searchName(data.get("searchkey"))
+        const results = await searchName(data.get("searchkey").trim())
         return {
             results: results
         };
@@ -30,7 +30,7 @@ export const actions = {
 
     usearch: async ({request}) => {
         const data = await request.formData();
-        const results = await getUserRecipes(data.get("searchkey"))
+        const results = await getUserRecipes(data.get("searchkey").trim())
         return {
             results: results
         };
