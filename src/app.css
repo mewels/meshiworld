@@ -55,8 +55,22 @@
 	--theme-color: rgb(75, 179, 179);
 	--input-color: #eff7fa;
 	--input-alt-color: rgb(255, 255, 255);
-	--button-color: rgb(252, 248, 241);
+	--button-color: rgb(246, 253, 255);
 	--steplabel-color: rgb(107, 136, 151);
+	--removebg-color: rgb(227, 160, 138);
+	--remove-color: rgb(163, 89, 67);
+}
+
+.puerh {
+	--section-color: #231f2b;
+	--background-color: #33161c;
+	--mid-grey: #0a2530;
+	--text-color: #a8883d;
+	--theme-color: rgb(243, 223, 159);
+	--input-color: #501417;
+	--input-alt-color: #501417;
+	--button-color: rgb(53, 47, 68);
+	--steplabel-color: a8883d(107, 136, 151);
 	--removebg-color: rgb(227, 160, 138);
 	--remove-color: rgb(163, 89, 67);
 }
