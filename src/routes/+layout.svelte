@@ -23,8 +23,8 @@
 	<main id="main" class="page-width page-padding">
 		<slot />
 	</main>
-	<span class = "switch"><Switcher/></span>
 </div>
+<span class = "switch"><Switcher/></span>
 
 <style>
 	.container {

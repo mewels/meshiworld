@@ -159,7 +159,7 @@
         border-width: 1px;
         border-color: black;
         background-color: var(--section-color);
-
+        z-index: -1;
     }
 
     div.recipe {

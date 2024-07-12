@@ -28,6 +28,7 @@
 	--input-color: #fffefb;
 	--input-alt-color: #fffefb;
 	--button-color: rgb(252, 248, 241);
+	--button-border-color: #d3d0ce;
 	--steplabel-color: rgb(191, 166, 147);
 	--removebg-color: rgb(227, 160, 138);
 	--remove-color: rgb(163, 89, 67);
@@ -42,6 +43,7 @@
 	--input-color: #f4ffd7;
 	--input-alt-color: #f4ffd7;
 	--button-color: rgb(252, 248, 241);
+	--button-border-color: #e7ebdc;
 	--steplabel-color: #1d3d0e9f;
 	--removebg-color: rgb(227, 160, 138);
 	--remove-color: rgb(163, 89, 67);
@@ -56,13 +58,14 @@
 	--input-color: #eff7fa;
 	--input-alt-color: rgb(255, 255, 255);
 	--button-color: rgb(246, 253, 255);
+	--button-border-color: #f4f7f8;
 	--steplabel-color: rgb(107, 136, 151);
 	--removebg-color: rgb(227, 160, 138);
 	--remove-color: rgb(163, 89, 67);
 }
 
 .puerh {
-	--section-color: #231f2b;
+	--section-color: #19171f;
 	--background-color: #33161c;
 	--mid-grey: #0a2530;
 	--text-color: #a8883d;
@@ -70,6 +73,7 @@
 	--input-color: #583538;
 	--input-alt-color: #501417;
 	--button-color: rgb(53, 47, 68);
+	--button-border-color: #494555;
 	--steplabel-color: a8883d(107, 136, 151);
 	--removebg-color: rgb(227, 160, 138);
 	--remove-color: rgb(163, 89, 67);
@@ -109,6 +113,7 @@ button {
 	padding-right: .5rem;
 	padding-top: .2rem;
 	padding-bottom: .2rem;
+	border-color: var(--button-border-color);
 }
 
 select {
