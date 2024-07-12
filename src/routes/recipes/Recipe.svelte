@@ -23,12 +23,11 @@
     {:else}
     <header class = "user">submitted by {user === '' ? 'anon' : user}</header>
     {/if}
+    <br>
     {#if notes !== ''}
-        <h3>notes</h3>
+    <h3>notes</h3>
         <div class = "notes">
-            <p> 
-                    {notes}
-            </p>
+            {notes}
         </div>
     {/if}
 
@@ -57,25 +56,24 @@
     {#if status[j] === "inline"}
         <div class = "sectioncontent">
             <h3>ingredients</h3>
-            <ul class = 'ingredients'>
+            <div class = 'ingredients'>
                 {#each section.ingredients as ingredient}
-                    <li>
-                        {ingredient.name} : {ingredient.amount}
-                    </li>
+                    <div>
+                        -- {ingredient.name} : {ingredient.amount}
+                    </div>
                 {/each}
-            </ul>
+            </div>
 
             {#if section.steps.length > 0}
-            <h3 class = "sectionnotes ">section notes</h3>
-            <ul class = 'sectionnotes'>
+            <br>
+            <h3>section notes</h3>
+            <div class = 'sectionnotes'>
                 {#each section.steps as step}
-                <li>
                     <div>
                         {step.action}
                     </div>
-                </li>
                 {/each}
-                </ul>
+            </div>
             {/if}
         </div>
         {/if}
@@ -84,7 +82,10 @@
     <h3>instructions</h3>
     <div class = 'steps'>
         {#each recsteplist as recstep}
-            {recstep.number} .  {recstep.action}
+        <div class = 'recstep'>
+        {recstep.number} .  {recstep.action}
+        <!-- <br> -->
+        </div>
         {/each}
     </div>
 
@@ -102,11 +103,30 @@
     }
     .notes {
         white-space: pre-wrap;
-        margin-left: 4rem;
-        margin-right: 4rem;
+        margin-top: .3em;
+        margin-bottom: 2em;
+        text-indent: 5%;
+        /* margin-left: 4rem; */
+        /* margin-right: 4rem; */
+        /* max-width: 4em; */
     }
 
     .steps {
+        /* text-align: center; */
+        /* white-space:pre-wrap; */
+        word-wrap: break-word;
+        margin-left: 1%;
+        border-style: none;
+        padding: .2rem;
+	    font-weight:lighter;
+        font-size: 20px;
+    }
+
+    .ingredients{ 
+        text-align: center;
+    }
+
+    .sectionnotes {
         text-align: center;
         white-space:pre-wrap;
         border-style: none;
@@ -117,30 +137,10 @@
         font-family: pixelify;
         color: var(--text-color);
         /* margin-right: 5rem; */
-
     }
-
-    ul {
-        margin-top:0;
-        list-style: symbols("--  ");
-        text-align: center;
-        display: flex;
-        flex-wrap:wrap;
-        justify-content: center;
-    }
-
-    ul.sectionnotes {
-        list-style-type: symbols("--  ");
-        text-align: center;
-        white-space:pre-wrap;
-        border-style: none;
-        padding: .2rem;
-        /* font-style: italic; */
-	    font-weight:lighter;
-        font-size: 20px;
-        font-family: pixelify;
-        color: var(--text-color);
-        /* margin-right: 5rem; */
+    .recstep {
+        margin-bottom: .5em;
+        /* word-wrap: break-word; */
     }
     h2 {
         margin-bottom: 0;
