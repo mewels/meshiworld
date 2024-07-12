@@ -9,4 +9,9 @@
 
 <InfoHead pagedescription = "yay!" pagetitle = {data.username} pageurl={$page.url}/>
 
-<User pageuser = {data.username} recipes = {data.recipes} allrecipes = {data.allrecipes} allusers = {data.allusers} sessionuser = {data.sessionuser.username}/>
+{#if data.sessionuser}
+<User pageuser = {data.username} recipes = {data.recipes} allrecipes = {data.allrecipes} allusers = {data.allusers} datasessionuser = {data.sessionuser.username}/>
+{:else}
+<User pageuser = {data.username} recipes = {data.recipes} allrecipes = {data.allrecipes} allusers = {data.allusers} datasessionuser = ''/>
+{/if}
+
