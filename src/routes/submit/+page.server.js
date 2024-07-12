@@ -22,7 +22,7 @@ export const actions = {
 
         for (const section of temp.sections)
         {  
-            if (section.title === '' || section.title === "") {
+            if (temp.sections.length > 1 && (section.title === '' || section.title === "")) {
                 return fail(400, {index : section.number-1, missing: true,message: "please fill out all required fields"})
             }
 
@@ -58,7 +58,7 @@ export const actions = {
             console.error(error)
             return fail(500, {message: 'could not save recipe'});
         }
-        throw redirect(303, '/recipes/'+temp.id)
+        throw redirect(303, '/recipes/')
     },
 
     list: async () => {

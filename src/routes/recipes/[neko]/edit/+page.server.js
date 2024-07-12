@@ -21,7 +21,7 @@ export const actions = {
 
         for (const section of temp.sections)
             {  
-                if (section.title === '' || section.title === "") {
+                if (temp.sections.length > 1 && (section.title === '' || section.title === "")) {
                     return fail(400, {index : section.number-1, missing: true,message: "please fill out all required fields"})
                 }
     
