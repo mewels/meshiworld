@@ -70,6 +70,7 @@
 		border-bottom: 1px solid var(--mid-grey);
 		padding: 0.75rem 0;
         text-align: center;
+		background-color: var(--background-color);
 	}
 
     header {
