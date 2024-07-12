@@ -372,7 +372,6 @@
         border-color: black;
         background-color: var(--section-color);
         position: relative;
-        z-index: -1;
     }
 
 
