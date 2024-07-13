@@ -1,4 +1,7 @@
 <script>
+
+    import Switcher from '$lib/Switcher.svelte';
+
     export let pageuser;
     export let recipes;
     export let allrecipes;
@@ -41,6 +44,8 @@
         </form>
     {/if}
 
+    <span class = "switch"><Switcher/></span>
+    <br>
 
     {#if sessionuser && sessionuser === pageuser}
         <form method='POST' action="?/logout">
@@ -62,5 +67,12 @@
     div.recipelist {
         padding-bottom: 3rem;
     }
+
+    .switch {
+		position:fixed;
+		bottom: 50px;
+		right: 50px;
+		font-family:pixelify;
+	}
 
 </style>

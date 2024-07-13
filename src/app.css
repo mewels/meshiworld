@@ -7,21 +7,25 @@
 	
 	--page-padding: 1rem;
 
-	--background-color: #faf4e7;
-	--section-color: rgba(163, 89, 67, 0.103);
-	--mid-grey: rgb(180, 180, 180);
+	--background-color: #f8eed9;
+	--section-color: rgb(219, 199, 179);
+	--section-alt-color: rgb(226, 206, 186);
+	--mid-grey: #3a3221;
 	--text-color: #3a3221;
-	--theme-color: rgb(163, 89, 67);
+	--theme-color: rgb(138, 97, 85);
 	--input-color: #fffefb;
-	--button-color: rgba(255, 255, 255, 0.637);
-	--steplabel-color: rgba(107, 60, 45, 0.404);
-	--removebg-color: rgba(255, 30, 0, 0.226);
+	--input-alt-color: #fffefb;
+	--button-color: rgb(252, 248, 241);
+	--button-border-color: #d3d0ce;
+	--steplabel-color: rgb(191, 166, 147);
+	--removebg-color: rgb(227, 160, 138);
 	--remove-color: rgb(163, 89, 67);
 }
 
-.latte {
+.chai {
 	--background-color: #f8eed9;
 	--section-color: rgb(219, 199, 179);
+	--section-alt-color: rgb(226, 206, 186);
 	--mid-grey: #3a3221;
 	--text-color: #3a3221;
 	--theme-color: rgb(138, 97, 85);
@@ -36,6 +40,7 @@
 
 .matcha {
 	--section-color: rgb(183, 205, 145);
+	--section-alt-color: rgb(194, 216, 156);
 	--background-color: #d1e6b0;
 	--mid-grey: #1d3d0e;
 	--text-color: #1d3d0e;
@@ -51,6 +56,7 @@
 
 .water {
 	--section-color: #eff7fa;
+	--section-alt-color: #dfeff5;
 	--background-color: rgb(255, 255, 255);
 	--mid-grey: #0a2530;
 	--text-color: #0a2530;
@@ -66,6 +72,7 @@
 
 .puerh {
 	--section-color: #19171f;
+	--section-alt-color: #1d1b24;
 	--background-color: #33161c;
 	--mid-grey: #0a2530;
 	--text-color: #a8883d;
@@ -104,6 +111,12 @@ body {
 	padding: 0 var(--page-padding);
 }
 
+* {
+	transition: 100ms background-color cubic-bezier(0.16, 1, 0.3, 1), 
+	100ms color cubic-bezier(0.16, 1, 0.3, 1),
+	100ms border-color cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 button {
 	background-color: var(--button-color);
 	font-family: pixelify;
@@ -122,6 +135,7 @@ select {
 	font-family: pixelify;
 	font-size: 20px;
 	color: var(--text-color);
+	border-color: var(--button-border-color);
 }
 
 option {

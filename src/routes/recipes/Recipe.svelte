@@ -55,14 +55,14 @@
     {#each seclist as section, j}
     {#if status[j] === "inline"}
         <div class = "sectioncontent">
-            <h3>ingredients</h3>
-            <div class = 'ingredients'>
+            <h3 style="margin-bottom:.5rem;">ingredients</h3>
+            <!-- <div class = 'ingredients'> -->
                 {#each section.ingredients as ingredient}
-                    <div>
-                        -- {ingredient.name} : {ingredient.amount}
+                    <div class = "ingredients">
+                        <span class = "ingelement">{ingredient.name}</span> <span class = "ingelement>">:</span><span class = "ingelement">{ingredient.amount}</span>
                     </div>
                 {/each}
-            </div>
+            <!-- </div> -->
 
             {#if section.steps.length > 0}
             <br>
@@ -95,6 +95,7 @@
 </div>
 
 <style>
+    
     header.user {
         margin-top: 0;
         font-weight: 25;
@@ -124,6 +125,24 @@
 
     .ingredients{ 
         text-align: center;
+        padding: .1em;
+        gap: 1em;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ingredients:nth-child(even)
+    {
+        background-color: var(--section-alt-color);
+    }
+
+    .ingelement {
+        display: inline-block;
+        width: 10em;
+        /* padding-bottom:.5em; */
+        /* transform: translate(0,50%); */
+
     }
 
     .sectionnotes {
@@ -136,6 +155,7 @@
         font-size: 20px;
         font-family: pixelify;
         color: var(--text-color);
+        word-break: break-all;
         /* margin-right: 5rem; */
     }
     .recstep {
@@ -154,11 +174,13 @@
     div.sectioncontent {
         margin-bottom: .5em;
         padding-top: .5em;
-        padding-bottom: .5em;
+        padding-bottom: 1em;
         border-style: hidden;
         border-width: 1px;
         border-color: black;
         background-color: var(--section-color);
+        padding-left: 1em;
+        padding-right: 1em;
     }
 
     div.recipe {

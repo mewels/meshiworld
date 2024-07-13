@@ -24,7 +24,7 @@
 		<slot />
 	</main>
 </div>
-<span class = "switch"><Switcher/></span>
+<!-- <span class = "switch"><Switcher/></span> -->
 
 <style>
 	.container {
@@ -36,12 +36,12 @@
 
 	}
 
-	.switch {
+	/* .switch {
 		position:fixed;
 		bottom: 50px;
-		right: 50px;
+		right: 5px;
 		font-family:pixelify;
-	}
+	} */
 
 	.skip-to-content {
 		position: absolute;

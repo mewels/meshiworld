@@ -1,5 +1,7 @@
 <script>
     import {page} from '$app/stores'
+	import { theme } from '../stores.js'
+	import { onMount, onDestroy } from "svelte";
 	export let sessionuser;
 	let links = {
 			'/' : 'home',
@@ -17,6 +19,10 @@
 		}
 	}
 
+	onMount (() => {
+        document.querySelector("body").classList=[{$theme}]
+	})
+
     /**
 	 * @param {string} current_path
 	 * @param {string} search_path
@@ -29,11 +35,74 @@
 
 		return is_in_path ? 'page' : null
 	}
+
+	function keyToggle(event){
+		if (event.key === "Enter")
+		{
+			switch ($theme) {
+			case "chai": 		
+			{
+				$theme = "matcha";
+				break;
+			}
+
+			case "matcha": 			
+			{
+				$theme = "water";
+				break;
+			}
+
+			case "water":
+			{
+				$theme = "puerh";
+				break;
+			}
+
+			case "puerh":
+			{
+				$theme = "chai";
+				break;
+			}
+		}
+		}
+	}
+
+	function toggleList() {
+		switch ($theme) {
+			case "chai": 		
+			{
+				localStorage.setItem("theme","matcha")
+				$theme = "matcha";
+				break;
+			}
+
+			case "matcha": 			
+			{
+				localStorage.setItem("theme","water")
+				$theme = "water";
+				break;
+			}
+
+			case "water":
+			{
+				localStorage.setItem("theme","puerh")
+				$theme = "puerh";
+				break;
+			}
+
+			case "puerh":
+			{
+				localStorage.setItem("theme","chai")
+				$theme = "chai";
+				break;
+			}
+		}
+	}
 </script>
 
 <div class="outer page-width page padding" style="background: none;">
     <div class = "container">
-        <header>meshi  ♡  world</header>
+        <header>meshi  <span on:keydown={keyToggle} on:click={toggleList} class = "value">♡</span> world</header>
         <nav aria-label="bagelzone">
             <ul role ="menubar" aria-label="main navigation">
                 {#each Object.entries(links) as [href, text]}
@@ -89,6 +158,15 @@
         justify-content: center;
 		background: none;
 	}
+
+	.value {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 
 	a:active {
 		background: var(--background-color) !important;

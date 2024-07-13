@@ -5,6 +5,8 @@
 
     let visible = false;
     let widget = false;
+    let render = false;
+    let rendersymbol = "<"
     let themename;
 
     // const unsubscribe = theme.subscribe((value) => {
@@ -19,9 +21,49 @@
 
     // onDestroy(unsubscribe)
 
+    // const toggleRender = () => {
+    //     render = !render;
+    //     if (render)
+    //     {
+    //         rendersymbol = ">"
+    //     }
+    //     else {
+    //         rendersymbol = "<"
+    //     }
+    // }
+    
+    // function keyRender(event) {
+    //     console.log(event.key)
+    //     if (event.key === "Enter")
+    //     {
+    //         render = !render;
+    //         if (render)
+    //         {
+    //             rendersymbol = ">"
+    //         }
+    //         else {
+    //             rendersymbol = "<"
+    //         }
+    //     }
+    //     if (event.key === "ArrowRight")
+    //     {
+    //         document.querySelector("span.value").focus();
+    //     }
+    // }
+
     const toggleList = () => {
-        console.log(visible)
         visible = !visible;
+    }
+
+    function keyToggle(event){
+        if(event.key === "ArrowUp" || event.key === "ArrowDown" || event.key === "Tab")
+        {
+            document.querySelector("li.puerh").focus()
+        }
+        if(event.key === "Enter")
+        {
+            visible = !visible;
+        }
     }
 
     function selectElement(argument) {
@@ -29,33 +71,83 @@
         $theme = argument;
         toggleList()
     }
+
+    function keyElement(event, argument) {
+        if (event.key === "Enter") {
+            localStorage.setItem("theme",argument)
+            $theme = argument;
+            toggleList()
+        }
+        if (argument === "puerh" && event.key === "ArrowUp")
+        {
+            // focus water
+            document.querySelector("li.water").focus()
+        }
+        if (argument === "puerh" && event.key === "ArrowDown")
+        {
+            // focus chai
+            document.querySelector("li.chai").focus()
+        }
+        if (argument === "water" && event.key === "ArrowUp")
+        {
+            // focus matcha
+            document.querySelector("li.matcha").focus()
+        }
+        if (argument === "water" && event.key === "ArrowDown")
+        {
+            // focus puerh
+            document.querySelector("li.puerh").focus()
+        }
+        if (argument === "matcha" && event.key === "ArrowUp")
+        {
+            // focus chai
+            document.querySelector("li.chai").focus()
+        }
+        if (argument === "matcha" && event.key === "ArrowDown")
+        {
+            // focus water
+            document.querySelector("li.water").focus()
+        }
+        if (argument === "chai" && event.key === "ArrowUp")
+        {
+            // focus puerh
+            document.querySelector("li.puerh").focus()
+        }
+        if (argument === "chai" && event.key === "ArrowDown")
+        {
+            // focus matcha
+            document.querySelector("li.matcha").focus()
+        }
+    }
 </script>
 
 
-<body>
+<div class = "wrapper">
     <form>
-        <!-- <select name="theme">
-            <option>latte</option>
+        <!-- <select name="theme">  
+            <option>chai</option>
             <option>matcha</option>
             <option>water</option>
-            <option>puerh</option>
+            <option>puerh</option>  
         </select> -->
         <!-- {console.log(selectedValue)}; -->
 
-        <div class = "switch">
-            {#if visible && widget}
-            <ul class = "optionlist">
-                <li on:click={()=>selectElement("latte")} class = "option latte">latte</li>
-                <li on:click={()=>selectElement("matcha")} class = "option matcha">matcha</li>
-                <li on:click={()=>selectElement("water")} class = "option water">water</li>
-                <li on:click={()=>selectElement("puerh")} class = "option puerh">puerh</li>
-            </ul>
-            {/if}
-
-            <span on:click={toggleList} class = "value">{$theme}</span>
-        </div>
+        <!-- <span class = "rendertoggle" on:keypress={keyRender} on:click={toggleRender} tabindex = "0">{rendersymbol}</span> -->
+        <!-- {#if render} -->
+            <div class = "switch">
+                {#if visible && widget}
+                <ul class = "optionlist">
+                    <li on:keydown={(event)=>keyElement(event, "chai")} on:click={()=>selectElement("chai")} class = "option chai" tabindex ="0" >chai</li>
+                    <li on:keydown={(event)=>keyElement(event, "matcha")} on:click={()=>selectElement("matcha")} class = "option matcha" tabindex ="0">matcha</li>
+                    <li on:keydown={(event)=>keyElement(event,"water")} on:click={()=>selectElement("water")} class = "option water" tabindex ="0" >water</li>
+                    <li on:keydown={(event)=>keyElement(event,"puerh")} on:click={()=>selectElement("puerh")} class = "option puerh" tabindex ="0" >puerh</li>
+                </ul>
+                {/if}
+                <span on:keydown={keyToggle} on:click={toggleList} class = "value" tabindex="0">{$theme}</span>
+            </div>
+        <!-- {/if} -->
     </form>
-</body>
+</div>
 
 <style>
     .switch {
@@ -63,10 +155,6 @@
         display: inline-block;
         font-family: pixelify;
         box-sizing: border-box;
-        /* padding-bottom:.1em;
-        padding-top: .1em;
-        padding-left: .3em;
-        padding-right: 1.5em; */
         font-size: 25px;
         width: 6em; 
         background-color: var(--section-color);
@@ -77,7 +165,6 @@
         padding-bottom:.1em;
         padding-top: .1em;
         padding-left: .3em;
-        padding-right: 1.5em;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;
@@ -91,10 +178,23 @@
     } */
 
     .switch .optionlist {
-        position: absolute;
-        bottom: 100%;
-        left: 0;
+
+        /* background-color: var(--section-color); */
+    }
+
+    .wrapper {
+        gap:0;
+    }
+
+    .rendertoggle
+    {
+        padding-bottom:.25em;
+        padding-top: .65em;
+        padding-left: .1em;
+        padding-right: .1em;
         background-color: var(--section-color);
+        border: 2px solid var(--section-color)
+        /* align-items: center; */
     }
 
     /* .switch .optionlist.hidden {
@@ -114,6 +214,9 @@
 
 
     .switch .optionlist {
+        position: absolute;
+        bottom: 100%;
+        left: 0;
         list-style: none;
         margin: 0;
         margin-bottom: 10px;
@@ -130,7 +233,7 @@
         overflow-x: hidden;
 
         border-top-width: 0.1em;
-        background: var(--background-color);
+        /* background: var(--background-color); */
     }
 
     li {
@@ -145,7 +248,7 @@
     }
 
 /* 
-    li.latte {
+    li.chai {
         background-color: #f8eed9;
         color: #3a3221;
     }
