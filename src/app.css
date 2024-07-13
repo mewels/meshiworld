@@ -86,6 +86,11 @@
 	--remove-color: rgb(163, 89, 67);
 }
 
+@media (max-width: 500px) {
+	:root {
+		--page-padding: 0;
+	}	
+}
 
 @font-face {
 	font-family: pixelify;

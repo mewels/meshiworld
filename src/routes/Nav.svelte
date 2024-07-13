@@ -102,7 +102,7 @@
 
 <div class="outer page-width page padding" style="background: none;">
     <div class = "container">
-        <header>meshi  <span on:keydown={keyToggle} on:click={toggleList} class = "value">♡</span> world</header>
+        <header>meshi  <span role="button" on:keydown={keyToggle} on:click={toggleList} class = "value" tabindex="0">♡</span> world</header>
         <nav aria-label="bagelzone">
             <ul role ="menubar" aria-label="main navigation">
                 {#each Object.entries(links) as [href, text]}

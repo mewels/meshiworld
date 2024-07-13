@@ -124,27 +124,23 @@
 
 <div class = "wrapper">
     <form>
-        <!-- <select name="theme">  
-            <option>chai</option>
-            <option>matcha</option>
-            <option>water</option>
-            <option>puerh</option>  
-        </select> -->
-        <!-- {console.log(selectedValue)}; -->
 
         <!-- <span class = "rendertoggle" on:keypress={keyRender} on:click={toggleRender} tabindex = "0">{rendersymbol}</span> -->
         <!-- {#if render} -->
+
             <div class = "switch">
                 {#if visible && widget}
-                <ul class = "optionlist">
-                    <li on:keydown={(event)=>keyElement(event, "chai")} on:click={()=>selectElement("chai")} class = "option chai" tabindex ="0" >chai</li>
-                    <li on:keydown={(event)=>keyElement(event, "matcha")} on:click={()=>selectElement("matcha")} class = "option matcha" tabindex ="0">matcha</li>
-                    <li on:keydown={(event)=>keyElement(event,"water")} on:click={()=>selectElement("water")} class = "option water" tabindex ="0" >water</li>
-                    <li on:keydown={(event)=>keyElement(event,"puerh")} on:click={()=>selectElement("puerh")} class = "option puerh" tabindex ="0" >puerh</li>
-                </ul>
-                {/if}
-                <span on:keydown={keyToggle} on:click={toggleList} class = "value" tabindex="0">{$theme}</span>
+                    <ul class = "optionlist">
+                        <li on:keydown={(event)=>keyElement(event, "chai")} on:click={()=>selectElement("chai")} class = "option chai" tabindex ="0" >chai</li>
+                        <li on:keydown={(event)=>keyElement(event, "matcha")} on:click={()=>selectElement("matcha")} class = "option matcha" tabindex ="0">matcha</li>
+                        <li on:keydown={(event)=>keyElement(event,"water")} on:click={()=>selectElement("water")} class = "option water" tabindex ="0" >water</li>
+                        <li on:keydown={(event)=>keyElement(event,"puerh")} on:click={()=>selectElement("puerh")} class = "option puerh" tabindex ="0" >puerh</li>
+                    </ul>
+                    {/if}
+                    <span role = "switch" aria-checked="true" on:keydown={keyToggle} on:click={toggleList} class = "value" tabindex="0">{$theme}</span>
+
             </div>
+
         <!-- {/if} -->
     </form>
 </div>
@@ -173,20 +169,11 @@
         user-select: none;
     }
 
-    /* .switch active,.switch:focus {
-        outline-color:transparent;
-    } */
-
-    .switch .optionlist {
-
-        /* background-color: var(--section-color); */
-    }
-
     .wrapper {
         gap:0;
     }
 
-    .rendertoggle
+    /* .rendertoggle
     {
         padding-bottom:.25em;
         padding-top: .65em;
@@ -194,8 +181,8 @@
         padding-right: .1em;
         background-color: var(--section-color);
         border: 2px solid var(--section-color)
-        /* align-items: center; */
-    }
+        align-items: center; 
+    } */
 
     /* .switch .optionlist.hidden {
         max-height: 0;
