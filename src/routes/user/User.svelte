@@ -12,8 +12,6 @@
 </script>
 <div class="User">
     <h2>{pageuser}'s page</h2>
-
-
     <div class = 'recipelist'>
         <h3>my recipes</h3>
         {#each recipes as {id, name}}
@@ -65,14 +63,20 @@
     }
 
     div.recipelist {
-        padding-bottom: 3rem;
+        padding-bottom: 1rem;
     }
 
     .switch {
 		position:fixed;
-		bottom: 50px;
-		right: 50px;
+		bottom: 1em;
+		right: 1em;
 		font-family:pixelify;
+        z-index: 4;
 	}
+    
+    h2 {
+        margin-bottom:0;
+        padding-bottom: 0;
+    }
 
 </style>
