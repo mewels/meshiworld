@@ -91,7 +91,7 @@
 
 </script>
 
-<InfoHead pagedescription="> ______ /<" pagetitle ="hell world" pageurl = {$page.url}/>
+<InfoHead pagedescription="submit recipe" pagetitle ="submit recipe" pageurl = {$page.url}/>
 
 <div>
     <div class = "submit">

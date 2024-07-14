@@ -4,7 +4,7 @@
     import Nav from './Nav.svelte';
 </script>
 
-<InfoHead pagedescription = '^ ____ ^' pagetitle = 'bagelzone' pageurl = {$page.url}/>
+<InfoHead pagedescription = 'meshi world home' pagetitle = 'meshi world' pageurl = {$page.url}/>
 
 <div>
     <p>

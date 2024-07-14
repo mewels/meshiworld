@@ -8,7 +8,7 @@
     export let data;
 </script>
 
-<InfoHead pagedescription = "yay!" pagetitle = {data.recipe.name} pageurl={$page.url}/>
+<InfoHead pagedescription = "{data.recipe.name}" pagetitle = {data.recipe.name} pageurl={$page.url}/>
 <div>
     <Recipe name = {data.recipe.name} user = {data.recipe.user} notes = {data.recipe.notes} seclist={data.recipe.sections} recsteplist = {data.recipe.recsteps} userid = {data.recipe.userId}
     />

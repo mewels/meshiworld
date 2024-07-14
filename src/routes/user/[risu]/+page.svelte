@@ -7,7 +7,7 @@
     export let data;
 </script>
 
-<InfoHead pagedescription = "yay!" pagetitle = {data.username} pageurl={$page.url}/>
+<InfoHead pagedescription = "{data.username}'s page!" pagetitle = {data.username} pageurl={$page.url}/>
 
 {#if data.sessionuser}
 <User pageuser = {data.username} recipes = {data.recipes} allrecipes = {data.allrecipes} allusers = {data.allusers} sessionuser = {data.sessionuser.username}/>

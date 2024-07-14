@@ -42,10 +42,10 @@
         </form>
     {/if}
 
-    <span class = "switch"><Switcher/></span>
-    <br>
-
     {#if sessionuser && sessionuser === pageuser}
+        <span class = "switch"><Switcher/></span>
+        <br>
+
         <form method='POST' action="?/logout">
             <button>
                 logout

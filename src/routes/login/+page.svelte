@@ -9,7 +9,7 @@
     export let data;
 </script>
 
-<InfoHead pagedescription = '^ ____ ^' pagetitle = 'bagelzone' pageurl = {$page.url}/>
+<InfoHead pagedescription = 'login' pagetitle = 'login' pageurl = {$page.url}/>
 
 <div>
     <form method='POST' action = "?/login">

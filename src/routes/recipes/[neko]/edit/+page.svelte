@@ -91,7 +91,7 @@
     };
 </script>
 
-<InfoHead pagedescription="> ______ /<" pagetitle ="hell world" pageurl = {$page.url}/>
+<InfoHead pagedescription="edit page" pagetitle ="editing {name}" pageurl = {$page.url}/>
 
 <div>
     <div class = "submit">

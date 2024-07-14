@@ -14,7 +14,7 @@
     var searchkey = 'nsearch';    
 </script>
 
-<InfoHead pagedescription="0 ____ 0" pagetitle ="meshi  . world" pageurl = {$page.url}/>
+<InfoHead pagedescription="the meshi archive" pagetitle ="the meshi archive" pageurl = {$page.url}/>
 
 <div>
     <form method="POST" action='?/{searchkey}' use:enhance>
