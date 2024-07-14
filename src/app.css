@@ -88,7 +88,7 @@
 
 @media (max-width: 500px) {
 	:root {
-		--page-padding: 0;
+		--page-padding: .3rem;
 	}	
 }
 
