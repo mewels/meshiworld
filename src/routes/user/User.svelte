@@ -1,6 +1,7 @@
 <script>
 
     import Switcher from '$lib/Switcher.svelte';
+    import {theme} from '../../stores.js'
 
     export let pageuser;
     export let recipes;

@@ -14,10 +14,10 @@
     //     themename = value;
 	// });
 
-    onMount (() => {
-        document.querySelector("body").classList=[{$theme}]
-        widget = true;
-	})
+    // onMount (() => {
+    //     document.querySelector("body").classList=[{$theme}]
+    //     widget = true;
+	// })
 
     // onDestroy(unsubscribe)
 
