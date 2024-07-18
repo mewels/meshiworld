@@ -353,6 +353,13 @@
         margin-top:0;
     }
 
+    @media (max-width: 500px) {
+	    div.submit {
+		    margin: .3rem;
+	    }	
+    }
+
+
     div.usertag {
         font-size: 16px;
     }

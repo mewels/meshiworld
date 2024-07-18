@@ -241,7 +241,7 @@
 </div>
 
 <style>
-        input.text {
+    input.text {
         background:none;
         border-style: none;
         padding: .2rem;
@@ -414,6 +414,12 @@
     div.submit {
         margin: 2em;
         margin-top:0;
+    }
+
+    @media (max-width: 500px) {
+	    div.submit {
+		    margin: .3rem;
+	    }	
     }
 
     div.usertag {
