@@ -100,7 +100,7 @@
 	}
 </script>
 
-<div class="outer page-width page padding" style="background: none;">
+<div class="outer page-width page padding">
     <div class = "container">
         <header>meshi  <span role="button" on:keydown={keyToggle} on:click={toggleList} class = "value" tabindex="0">♡</span> world</header>
         <nav aria-label="bagelzone">

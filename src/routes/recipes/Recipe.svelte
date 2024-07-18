@@ -155,7 +155,7 @@
         font-size: 20px;
         font-family: pixelify;
         color: var(--text-color);
-        word-break: break-all;
+        /* word-break: break-all; */
         /* margin-right: 5rem; */
     }
     .recstep {
@@ -184,9 +184,18 @@
     }
 
     div.recipe {
-        margin:2rem;
+        margin: 2rem;
         margin-top:0;
     }
+
+    @media (max-width: 500px) {
+	div.recipe {
+		margin: .3rem;
+	}	
+}
+
+
+
 
     div.tab {
         margin-bottom: 0em;
