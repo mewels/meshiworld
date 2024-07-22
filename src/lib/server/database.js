@@ -167,6 +167,7 @@ export async function getUserRecipes(arg) {
                 mode: 'insensitive',
             },
         },
+        orderBy: {timestamp: 'desc'},
     });
     return recipes;
 }
@@ -281,6 +282,7 @@ export async function searchName(arg) {
                         mode: 'insensitive',
                     },
         },
+        orderBy: {timestamp: 'desc'},
         // include: {
         //     ingredients: true,
         //     steps: true,
@@ -321,7 +323,7 @@ export async function searchIngredient(arg) {
 }
 
 export async function listAll() {
-    const recipes = await db.recipe.findMany({});
+    const recipes = await db.recipe.findMany({orderBy:{timestamp:'desc'}});
     return recipes;
 }
 
@@ -344,6 +346,7 @@ export async function getRecipe(id) {
             },
             recsteps: true,
         },
+        
     })
     return recipe;
 }
