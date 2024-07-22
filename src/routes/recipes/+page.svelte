@@ -46,14 +46,14 @@
         <ul>
             {#if form?.results === undefined}
                 {#each data.recipes as recipe}
-                    <li><a href="/recipes/{recipe.id}" data-sveltekit-preload-data>{recipe.name} - {recipe.timestamp}</a></li>
+                    <li><a href="/recipes/{recipe.id}" data-sveltekit-preload-data>{recipe.name}</a></li>
                 {/each}
             {:else}
                 {#if Object.is(form?.results, []) ||  form?.results.length === 0}
                     <p>no results found...</p>
                 {:else} 
                     {#each form?.results as recipe}
-                        <li><a href="/recipes/{recipe.id}" data-sveltekit-preload-data>{recipe.name} - {recipe.timestamp}</a></li>
+                        <li><a href="/recipes/{recipe.id}" data-sveltekit-preload-data>{recipe.name}</a></li>
                     {/each}
                 {/if}
             {/if}   
