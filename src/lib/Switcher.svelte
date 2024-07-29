@@ -53,6 +53,7 @@
 
     const toggleList = () => {
         visible = !visible;
+        console.log(visible)
     }
 
     function keyToggle(event){
@@ -129,7 +130,7 @@
         <!-- {#if render} -->
 
             <div class = "switch">
-                {#if visible && widget}
+                {#if visible}
                     <ul class = "optionlist">
                         <li on:keydown={(event)=>keyElement(event, "chai")} on:click={()=>selectElement("chai")} class = "option chai" tabindex ="0" >chai</li>
                         <li on:keydown={(event)=>keyElement(event, "matcha")} on:click={()=>selectElement("matcha")} class = "option matcha" tabindex ="0">matcha</li>
@@ -155,6 +156,13 @@
         width: 6em; 
         background-color: var(--section-color);
         border: 2px solid var(--section-color);
+    }
+
+    @media (max-width: 500px) {
+        div.switch {
+            font-size: 20px;
+            width: 5em;
+        }	
     }
 
     .value {

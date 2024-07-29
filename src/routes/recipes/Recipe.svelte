@@ -189,10 +189,10 @@
     }
 
     @media (max-width: 500px) {
-	div.recipe {
-		margin: .3rem;
-	}	
-}
+        div.recipe {
+            margin: .3rem;
+        }	
+    }
 
 
 
