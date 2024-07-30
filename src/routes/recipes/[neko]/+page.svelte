@@ -14,7 +14,7 @@
     />
 
     {#if data.sessionuser}
-        {#if data.recipe.user === data.sessionuser.username}
+        {#if data.recipe.user.toLowerCase() === data.sessionuser.username.toLowerCase() }
             <form method='POST' action='?/edit'>
                 <button class = "edit">
                     edit
