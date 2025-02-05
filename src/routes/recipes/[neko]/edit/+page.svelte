@@ -17,7 +17,7 @@
     let name = data.recipe.name;
     let user = data.recipe.user;
     let notes = data.recipe.notes;
-    let userid = data.recipe.userid;
+    let userid = data.recipe.userId;
     let id = data.recipe.id;
     let recsteplist = data.recipe.recsteps;
     let status = ["inline"];
@@ -73,11 +73,6 @@
     function selectSection(j) {
         status.fill("none");
         status[j] = "inline";
-    }
-
-    $: if (data.sessionuser) {
-        user = data.sessionuser.username
-        userid = data.sessionuser.id
     }
 
     $: compiledrecipe = {

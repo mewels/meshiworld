@@ -15,15 +15,6 @@
         <p class="inner">
             there's a <a href = "https://github.com/mewels/maraweb">github</a> page! 
         </p>
-        <!-- <div>
-            <form method="POST" action='?/delete'>
-                <label>
-                    <button>
-                        delete delete delete
-                    </button> 
-                </label>
-            </form>
-        </div> -->
 </div>
 
 <style>
