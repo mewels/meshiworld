@@ -1,7 +1,6 @@
 // import { writable } from 'svelte/store';
 
-
-import { persistent } from "@furudean/svelte-persistent-store"
+import { persistent } from "../src/lib/PersistentStore.js"
 
 export const theme = persistent({
 	start_value: "chai",
