@@ -150,7 +150,7 @@
     .switch {
         position: relative;
         display: inline-block;
-        font-family: pixelify;
+        font-family: comic-sans;
         box-sizing: border-box;
         font-size: 25px;
         width: 6em; 

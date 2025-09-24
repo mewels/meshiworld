@@ -40,7 +40,7 @@
 		position:fixed;
 		bottom: 50px;
 		right: 5px;
-		font-family:pixelify;
+		font-family:comic-sans;
 	} */
 
 	.skip-to-content {

@@ -71,7 +71,7 @@
 		position:fixed;
 		bottom: 1em;
 		right: 1em;
-		font-family:pixelify;
+		font-family:comic-sans;
         z-index: 4;
 	}
     

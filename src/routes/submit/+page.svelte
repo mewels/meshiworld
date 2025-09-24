@@ -249,7 +249,7 @@
         /* font-style: italic; */
 	    font-weight:lighter;
         font-size: 19px;
-        font-family: pixelify;
+        font-family: comic-sans;
         color: var(--text-color)
        
     }
@@ -262,7 +262,7 @@
         /* font-style: italic; */
 	    font-weight:lighter;
         font-size: 24px;
-        font-family: pixelify;
+        font-family: comic-sans;
         color: var(--text-color);
     }
 
@@ -275,7 +275,7 @@
         /* font-style: italic; */
 	    font-weight:lighter;
         font-size: 24px;
-        font-family: pixelify;
+        font-family: comic-sans;
         color: var(--text-color);
         background-color: var(--input-color);
        
@@ -288,7 +288,7 @@
         /* font-style: italic; */
 	    font-weight:lighter;
         font-size: 17px;
-        font-family: pixelify;
+        font-family: comic-sans;
         color: var(--text-color)
        
     }
@@ -333,7 +333,7 @@
         justify-content: center;
         font-style: italic;
 	    font-weight: lighter;
-        font-family: pixelify;
+        font-family: comic-sans;
         color: var(--steplabel-color);
 
     }
@@ -347,7 +347,7 @@
         justify-content: center;
         font-style: italic;
 	    font-weight: lighter;
-        font-family: pixelify;
+        font-family: comic-sans;
         color: var(--steplabel-color);
         background-color: var(--input-alt-color);
 
@@ -387,7 +387,7 @@
     }
     
     button {
-        font-family: pixelify;
+        font-family: comic-sans;
     }
 
     button.tablink {

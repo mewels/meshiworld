@@ -72,7 +72,7 @@
         font-style: italic;
 	    font-weight:lighter;
         font-size: 25px;
-        font-family: pixelify;
+        font-family: comic-sans;
         color: var(--text-color);
     }
 

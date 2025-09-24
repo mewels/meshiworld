@@ -153,7 +153,7 @@
         /* font-style: italic; */
 	    font-weight:lighter;
         font-size: 20px;
-        font-family: pixelify;
+        font-family: comic-sans;
         color: var(--text-color);
         /* word-break: break-all; */
         /* margin-right: 5rem; */

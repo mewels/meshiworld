@@ -2,7 +2,7 @@
 	font-size: 20px;
 	font-weight: normal;
 	line-height: 1.5;
-	font-family: pixelify;
+	font-family: comic-sans;
 	font-weight: 400;
 	
 	--page-padding: 1rem;
@@ -93,8 +93,8 @@
 }
 
 @font-face {
-	font-family: pixelify;
-	src: url("../src/routes/assets/pixelify_sans/PixelifySans-VariableFont_wght.ttf") format("truetype");
+	font-family: comic-sans;
+	src: url("../src/routes/assets/comic-sans-ms/COMIC.TTF") format("truetype");
 }
 
 body {
@@ -124,7 +124,7 @@ body {
 
 button {
 	background-color: var(--button-color);
-	font-family: pixelify;
+	font-family: comic-sans;
 	font-size: 20px;
 	color: var(--text-color);
 	padding-left: .5rem;
@@ -137,7 +137,7 @@ button {
 select {
 	padding: .2rem;
 	background-color: var(--button-color);
-	font-family: pixelify;
+	font-family: comic-sans;
 	font-size: 20px;
 	color: var(--text-color);
 	border-color: var(--button-border-color);
